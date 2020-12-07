@@ -9,48 +9,62 @@
 package step1;
 
 public class PushOutWords {
+	public String getRightpushedString(char[] inputCharArray, int inputCount, int lengthOfinputString) {
+		for (int i = lengthOfinputString; i > lengthOfinputString-inputCount; i--) {
+			char tempChar = inputCharArray[lengthOfinputString - 1];
+			System.out.println("tempChar " + tempChar);
+
+			for (int j = lengthOfinputString - 1; j > 0; j--) {
+				inputCharArray[j] = inputCharArray[j - 1];
+				System.out.println("inputCharArray " + inputCharArray[j]);
+			}
+
+			inputCharArray[0] = tempChar;
+		}
+		return String.valueOf(inputCharArray);
+	}
+	
+	public String getLeftpushedString(char[] inputCharArray, int inputCount, int lengthOfinputString) {
+		for (int index = 0; index < inputCount; index++) {
+			char tempChar = inputCharArray[0];
+			System.out.println("tempChar " + tempChar);
+
+			for (int j = 0; j < lengthOfinputString - 1; j++) {
+				inputCharArray[j] = inputCharArray[j + 1];
+				System.out.println("inputCharArray " + inputCharArray[j]);
+			}
+
+			inputCharArray[inputCharArray.length - 1] = tempChar;
+		}
+
+		return String.valueOf(inputCharArray);
+	}
+	
+
+	
+	
 
 	public static void main(String[] args) {
 
 		String inputString = "apple";
 		int inputCount = 3;
-		String inputDir = "r";
+		String inputDir = "l";
 		int lengthOfinputString = inputString.length();
+		PushOutWords pushWords = new PushOutWords();
 
 		char[] inputCharArray = inputString.toCharArray();
 		inputDir = inputDir.toUpperCase();
 
 		if (inputDir.equals("R")) {
-			for (int i = lengthOfinputString; i > lengthOfinputString-inputCount; i--) {
-				char tempChar = inputCharArray[lengthOfinputString - 1];
-				System.out.println("tempChar " + tempChar);
-
-				for (int j = lengthOfinputString - 1; j > 0; j--) {
-					inputCharArray[j] = inputCharArray[j - 1];
-					System.out.println("inputCharArray " + inputCharArray[j]);
-				}
-
-				inputCharArray[0] = tempChar;
-			}
-
-			String answer = String.valueOf(inputCharArray);
+			String answer = pushWords.getRightpushedString(inputCharArray, inputCount, lengthOfinputString);
+			
 			System.out.println("test R " + answer);
-
+			
 		} else if (inputDir.equals("L")) {
-			for (int index = 0; index < inputCount; index++) {
-				char tempChar = inputCharArray[0];
-				System.out.println("tempChar " + tempChar);
-
-				for (int j = 0; j < lengthOfinputString - 1; j++) {
-					inputCharArray[j] = inputCharArray[j + 1];
-					System.out.println("inputCharArray " + inputCharArray[j]);
-				}
-
-				inputCharArray[inputCharArray.length - 1] = tempChar;
-			}
-
-			String answer = String.valueOf(inputCharArray);
+			String answer = pushWords.getLeftpushedString(inputCharArray, inputCount, lengthOfinputString);
+			
 			System.out.println("test L " + answer);
+			
 		} else {
 			System.out.println("유효한 명령어를 입력하십시오");
 		}
