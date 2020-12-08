@@ -24,12 +24,12 @@ public class PromptCube {
 		PromptCube prompt = new PromptCube();
 		PushTwoDimensionalCube pushCube = new PushTwoDimensionalCube();
 
-		// 출력: 초기값 출력
+		// 초기값 출력
 		prompt.printResult(twoDimensionalCube);
 
 		while (true) {
 
-			// 입력: ex) UUR
+			// 사용자 입력
 			System.out.print("  CUBE> ");
 			String input = scanner.nextLine();
 			if(input.equals("Q")) break;
@@ -38,13 +38,12 @@ public class PromptCube {
 
 			System.out.println("");
 
+			// 각각의 명령 수행
 			for (String inputDir : inputSplit) {
-				// 반복: 각각의 명령 수행
-				// 명령 실행 로직
+				// 명령 실행 메소드
 				pushCube.getPushedCube(twoDimensionalCube, inputDir, SIZE_OF_CUBE);
 
-				// 출력: 각각의 명령
-				// 출력: 명령을 수행한 결과물
+				// 출력: 각각의 명령 및 명령에 따른 결과물
 				System.out.println("  " + inputDir);
 				prompt.printResult(twoDimensionalCube);
 			}
