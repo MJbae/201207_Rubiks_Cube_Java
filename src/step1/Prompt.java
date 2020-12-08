@@ -37,19 +37,19 @@ public class Prompt {
 			if ((inputCount >= 0 && inputDir.equals("R")) || (inputCount < 0 && inputDir.equals("L"))) {
 				inputCount = inputCount < 0 ? inputCount * (-1) : inputCount;
 				answer = pushWords.getRightpushedString(inputCharArray, inputCount, lengthOfinputString);
-				System.out.println("  " + answer);
-				System.out.println("");
 			// 왼쪽으로 문자를 회전시키는 경우
 			} else if ((inputCount >= 0 && inputDir.equals("L")) || (inputCount < 0 && inputDir.equals("R"))) {
 				inputCount = inputCount < 0 ? inputCount * (-1) : inputCount;
 				answer = pushWords.getLeftpushedString(inputCharArray, inputCount, lengthOfinputString);
-				System.out.println("  " + answer);
-				System.out.println("");
 			} else {
 				System.out.println("유효한 명령어를 입력하십시오");
 			}
+			
+			// 회전 결과 출력
+			System.out.println("  " + answer);
+			System.out.println("");
 		}
-		System.out.println("Done");
+		System.out.println("  Done");
 		scanner.close();
 	}
 
