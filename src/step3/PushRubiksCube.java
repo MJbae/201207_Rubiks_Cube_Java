@@ -8,7 +8,93 @@ public class PushRubiksCube {
 	private static final int DOWN_SIDE = 3;
 	private static final int RIGHT_SIDE = 4;
 	private static final int FRONT_SIDE = 5;
+	
+	// 메소드: 사용자 입력값 중 주요 키워드의 포함여부를 기준으로 세부 호출메소드 호출
+	public char[][][] getPushedRubiks(char[][][] rubiksCube, String inputDir) {
+		char[][] tempCube = new char[4][3];
 
+		if (inputDir.contains("R") || inputDir.contains("L")) {
+			rubiksCube = getRotatedRightLeft(rubiksCube, tempCube, inputDir);
+		} else if (inputDir.contains("F") || inputDir.contains("B")) {
+			rubiksCube = getRotatedFrontBack(rubiksCube, tempCube, inputDir);
+		} else if (inputDir.contains("U") || inputDir.contains("D")) {
+			rubiksCube = getRotatedUpDown(rubiksCube, tempCube, inputDir);
+		}
+
+		return rubiksCube;
+	}
+	
+	// 메소드: Right/Left Side의 Cube의 구체적인 회전동작을 기준으로 특정 메소드 호출
+	public char[][][] getRotatedRightLeft(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
+		switch (inputDir) {
+		// right-side Cube 시계방향 회전
+		case "R":
+			rubiksCube = getRightClockwise(rubiksCube, tempCube);
+			break;
+		// right-side Cube 반시계방향 회전
+		case "R'":
+			rubiksCube = getRightCounterClockwise(rubiksCube, tempCube);
+			break;
+		case "L":
+			rubiksCube = getLeftClockwise(rubiksCube, tempCube);
+			break;
+		case "L'":
+			rubiksCube = getLeftCounterClockwise(rubiksCube, tempCube);
+			break;
+		default:
+			break;
+		}
+
+		return rubiksCube;
+	}
+
+	// 메소드: Front/Back Side의 Cube의 구체적인 회전동작을 기준으로 특정 메소드 호출
+	public char[][][] getRotatedFrontBack(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
+		switch (inputDir) {
+		// font-side Cube 시계방향 회전
+		case "F":
+			rubiksCube = getFrontClockwise(rubiksCube, tempCube);
+			break;
+		// font-side Cube 반시계방향 회전
+		case "F'":
+			rubiksCube = getFrontCounterClockwise(rubiksCube, tempCube);
+			break;
+		case "B":
+			rubiksCube = getBackClockwise(rubiksCube, tempCube);
+			break;
+		case "B'":
+			rubiksCube = getBackCounterClockwise(rubiksCube, tempCube);
+			break;
+		default:
+			break;
+		}
+
+		return rubiksCube;
+	}
+
+	// 메소드: Up/Down Side의 Cube의 구체적인 회전동작을 기준으로 특정 메소드 호출
+	public char[][][] getRotatedUpDown(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
+		switch (inputDir) {
+		// Up-side Cube 시계방향 회전
+		case "U":
+			rubiksCube = getUpClockwise(rubiksCube, tempCube);
+			break;
+		case "U'":
+			rubiksCube = getUpCounterClockwise(rubiksCube, tempCube);
+			break;
+		case "D":
+			rubiksCube = getDownClockwise(rubiksCube, tempCube);
+			break;
+		case "D'":
+			rubiksCube = getDownCounterClockwise(rubiksCube, tempCube);
+			break;
+		default:
+			break;
+		}
+
+		return rubiksCube;
+	}
+	
 	public char[][][] getUpClockwise(char[][][] rubiksCube, char[][] tempCube) {
 		// tempCube에 각 side Cube의 첫번째행을 할당함
 		tempCube[0] = rubiksCube[LEFT_SIDE][0];
@@ -86,7 +172,7 @@ public class PushRubiksCube {
 	}
 	
 	public char[][][] getFrontClockwise(char[][][] rubiksCube, char[][] tempCube) {
-		// tempCube에 각 side Cube의 마지막 행을 할당함
+		// tempCube에 각 side Cube의 마지막행을 할당함
 		tempCube[0] = rubiksCube[LEFT_SIDE][2];
 		tempCube[1] = rubiksCube[UP_SIDE][2];
 		tempCube[2] = rubiksCube[RIGHT_SIDE][2];
@@ -123,16 +209,16 @@ public class PushRubiksCube {
 	}
 
 	public char[][][] getBackClockwise(char[][][] rubiksCube, char[][] tempCube) {
-		// tempCube에 각 side Cube의 마지막 행을 할당함
+		// tempCube에 각 side Cube의 첫번째행을 할당함
 		tempCube[0] = rubiksCube[LEFT_SIDE][0];
 		tempCube[1] = rubiksCube[UP_SIDE][0];
 		tempCube[2] = rubiksCube[RIGHT_SIDE][0];
 		tempCube[3] = rubiksCube[DOWN_SIDE][0];
 
-		// left 마지막행 -> down 마지막행
-		// down 마지막행 -> right 마지막행
-		// right 마지막행 -> up 마지막행
-		// up 마지막행 -> left 마지막행
+		// left 첫번째행 -> down 첫번째행
+		// down 첫번째행 -> right 첫번째행
+		// right 첫번째행 -> up 첫번째행
+		// up 첫번째행 -> left 첫번째행
 		rubiksCube[DOWN_SIDE][0] = tempCube[0];
 		rubiksCube[LEFT_SIDE][0] = tempCube[1];
 		rubiksCube[RIGHT_SIDE][0] = tempCube[3];
@@ -142,16 +228,16 @@ public class PushRubiksCube {
 	}
 
 	public char[][][] getBackCounterClockwise(char[][][] rubiksCube, char[][] tempCube) {
-		// tempCube에 각 side Cube의 마지막 행을 할당함
+		// tempCube에 각 side Cube의 첫번째행을 할당함
 		tempCube[0] = rubiksCube[LEFT_SIDE][0];
 		tempCube[1] = rubiksCube[UP_SIDE][0];
 		tempCube[2] = rubiksCube[RIGHT_SIDE][0];
 		tempCube[3] = rubiksCube[DOWN_SIDE][0];
 
-		// left 마지막행 -> up 마지막행
-		// up 마지막행 -> right 마지막행
-		// right 마지막행 -> down 마지막행
-		// down 마지막행 -> left 마지막행
+		// left 첫번째행 -> up 첫번째행
+		// up 첫번째행 -> right 첫번째행
+		// right 첫번째행 -> down 첫번째행
+		// down 첫번째행 -> left 첫번째행
 		rubiksCube[UP_SIDE][0] = tempCube[0];
 		rubiksCube[RIGHT_SIDE][0] = tempCube[1];
 		rubiksCube[DOWN_SIDE][0] = tempCube[2];
@@ -264,89 +350,6 @@ public class PushRubiksCube {
 			rubiksCube[DOWN_SIDE][i][0] = tempCube[2][i];
 		for (int i = 0; i < 3; i++)
 			rubiksCube[FRONT_SIDE][i][0] = tempCube[3][i];
-
-		return rubiksCube;
-	}
-
-	public char[][][] getRotatedRightLeft(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
-		switch (inputDir) {
-		// right-side Cube 시계방향 회전
-		case "R":
-			rubiksCube = getRightClockwise(rubiksCube, tempCube);
-			break;
-		// right-side Cube 반시계방향 회전
-		case "R'":
-			rubiksCube = getRightCounterClockwise(rubiksCube, tempCube);
-			break;
-		case "L":
-			rubiksCube = getLeftClockwise(rubiksCube, tempCube);
-			break;
-		case "L'":
-			rubiksCube = getLeftCounterClockwise(rubiksCube, tempCube);
-			break;
-		default:
-			break;
-		}
-
-		return rubiksCube;
-	}
-
-	public char[][][] getRotatedFrontBack(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
-		switch (inputDir) {
-		// font-side Cube 시계방향 회전
-		case "F":
-			rubiksCube = getFrontClockwise(rubiksCube, tempCube);
-			break;
-		// font-side Cube 반시계방향 회전
-		case "F'":
-			rubiksCube = getFrontCounterClockwise(rubiksCube, tempCube);
-			break;
-		case "B":
-			rubiksCube = getBackClockwise(rubiksCube, tempCube);
-			break;
-		case "B'":
-			rubiksCube = getBackCounterClockwise(rubiksCube, tempCube);
-			break;
-		default:
-			break;
-		}
-
-		return rubiksCube;
-	}
-
-	public char[][][] getRotatedUpDown(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
-		switch (inputDir) {
-		// Up-side Cube 시계방향 회전
-		case "U":
-			rubiksCube = getUpClockwise(rubiksCube, tempCube);
-			break;
-		case "U'":
-			rubiksCube = getUpCounterClockwise(rubiksCube, tempCube);
-			break;
-		case "D":
-			rubiksCube = getDownClockwise(rubiksCube, tempCube);
-			
-			break;
-		case "D'":
-			rubiksCube = getDownCounterClockwise(rubiksCube, tempCube);
-			break;
-		default:
-			break;
-		}
-
-		return rubiksCube;
-	}
-
-	public char[][][] getPushedRubiks(char[][][] rubiksCube, String inputDir) {
-		char[][] tempCube = new char[4][3];
-
-		if (inputDir.contains("R") || inputDir.contains("L")) {
-			rubiksCube = getRotatedRightLeft(rubiksCube, tempCube, inputDir);
-		} else if (inputDir.contains("F") || inputDir.contains("B")) {
-			rubiksCube = getRotatedFrontBack(rubiksCube, tempCube, inputDir);
-		} else if (inputDir.contains("U") || inputDir.contains("D")) {
-			rubiksCube = getRotatedUpDown(rubiksCube, tempCube, inputDir);
-		}
 
 		return rubiksCube;
 	}
