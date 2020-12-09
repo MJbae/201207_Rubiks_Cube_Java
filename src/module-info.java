@@ -1,2 +1,0 @@
-module Rubiks_Cube {
-}
