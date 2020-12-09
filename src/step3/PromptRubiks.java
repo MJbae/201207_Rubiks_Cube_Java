@@ -86,6 +86,7 @@ public class PromptRubiks {
 	public void executePrompt(char[][][] rubiksCube) {
 		Scanner scanner = new Scanner(System.in);
 		PushRubiksCube pushRubiks = new PushRubiksCube();
+		int rotationCount = 0;
 		// 초기값 출력
 		printResult(rubiksCube);
 
@@ -93,25 +94,29 @@ public class PromptRubiks {
 			// 사용자 입력
 			System.out.print("  CUBE> ");
 			String input = scanner.nextLine();
-			// 실행 중단 로직
+
+			// 실행 중단
 			if (input.equals("Q"))
 				break;
-			
-			
 
 			// inputSplit에 대해 공백문자 기준으로 분할하여 모든 명령어를 String array에 할당
 			String[] splitStringArray = splitInputString(input);
+			rotationCount += splitStringArray.length;
 			for (String inputDir : splitStringArray) {
-				
+
 				System.out.println("");
 				System.out.println("  " + inputDir);
-				
+
 				rubiksCube = pushRubiks.getPushedRubiks(rubiksCube, inputDir);
-				
+
 				// 결과값 출력
 				printResult(rubiksCube);
+
 			}
 		}
+		// 조작개수 출력
+		System.out.println("  조작개수: " + rotationCount);
+		System.out.println("  끝~ ");
 		scanner.close();
 	}
 
