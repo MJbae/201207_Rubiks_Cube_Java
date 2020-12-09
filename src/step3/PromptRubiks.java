@@ -4,6 +4,60 @@ import step2.*;
 import java.util.Scanner;
 
 public class PromptRubiks {
+	// 메소드: Rubiks Cube 전체 출력
+	public void printResult(char[][][] threeDimensionalCube) {
+		
+		final int LENGTH_OF_CUBE = threeDimensionalCube[0][0].length;
+		
+		// frontCube 출력
+		for (char[] oneDimensionalCube : threeDimensionalCube[0]) {
+			System.out.print("                  ");
+			for (char elementOfCube : oneDimensionalCube) {
+				System.out.print(elementOfCube + " ");
+			}
+			System.out.println("");
+		}
+		System.out.println("");
+		
+		for (int i = 0; i < LENGTH_OF_CUBE; i++) {
+			System.out.print("  ");
+			
+			// rightCube 출력
+			for (char elementOfCube : threeDimensionalCube[1][i]) {
+				System.out.print(elementOfCube + " ");
+			}
+			System.out.print("  ");
+			
+			// upCube 출력
+			for (char elementOfCube : threeDimensionalCube[2][i]) {
+				System.out.print(elementOfCube + " ");
+			}
+			System.out.print("  ");
+			
+			// backCube 출력
+			for (char elementOfCube : threeDimensionalCube[3][i]) {
+				System.out.print(elementOfCube + " ");
+			}
+			System.out.print("  ");
+			
+			// leftCube 출력
+			for (char elementOfCube : threeDimensionalCube[4][i]) {
+				System.out.print(elementOfCube + " ");
+			}
+			System.out.println("");
+		}
+		System.out.println("");
+		
+		// downCube 출력
+		for (char[] oneDimensionalCube : threeDimensionalCube[5]) {
+			System.out.print("                  ");
+			for (char elementOfCube : oneDimensionalCube) {
+				System.out.print(elementOfCube + " ");
+			}
+			System.out.println("");
+		}
+		System.out.println("");
+	}
 	
 	public void executePrompt(char[][][] rubiksCube) {
 		Scanner scanner = new Scanner(System.in);
@@ -11,7 +65,7 @@ public class PromptRubiks {
 		PushTwoDimensionalCube pushCube = new PushTwoDimensionalCube();
 
 		// 초기값 출력
-		for(char[][] eachCube : rubiksCube) prompt.printResult(eachCube);
+		printResult(rubiksCube);
 
 		while (true) {
 			// 사용자 입력
