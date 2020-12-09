@@ -81,7 +81,7 @@ public class PromptRubiks {
 		}
 		return new String(inputSplit).split(" ");
 	}
-	
+
 	// 메소드: 사용자 입력값 받고 결과물 출력
 	public void executePrompt(char[][][] rubiksCube) {
 		Scanner scanner = new Scanner(System.in);
@@ -96,14 +96,18 @@ public class PromptRubiks {
 			// 실행 중단 로직
 			if (input.equals("Q"))
 				break;
+			
+			
 
 			// inputSplit에 대해 공백문자 기준으로 분할하여 모든 명령어를 String array에 할당
 			String[] splitStringArray = splitInputString(input);
 			for (String inputDir : splitStringArray) {
+				
 				System.out.println("");
 				System.out.println("  " + inputDir);
 				
 				rubiksCube = pushRubiks.getPushedRubiks(rubiksCube, inputDir);
+				
 				// 결과값 출력
 				printResult(rubiksCube);
 			}
