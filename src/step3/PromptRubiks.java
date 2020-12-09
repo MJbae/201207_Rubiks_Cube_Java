@@ -79,15 +79,13 @@ public class PromptRubiks {
 				indexOfSplit += 2;
 			}
 		}
-
 		return new String(inputSplit).split(" ");
 	}
-
+	
+	// 메소드: 사용자 입력값 받고 결과물 출력
 	public void executePrompt(char[][][] rubiksCube) {
 		Scanner scanner = new Scanner(System.in);
-		PromptCube prompt = new PromptCube();
-		PushTwoDimensionalCube pushCube = new PushTwoDimensionalCube();
-
+		PushRubiksCube pushRubiks = new PushRubiksCube();
 		// 초기값 출력
 		printResult(rubiksCube);
 
@@ -101,8 +99,14 @@ public class PromptRubiks {
 
 			// inputSplit에 대해 공백문자 기준으로 분할하여 모든 명령어를 String array에 할당
 			String[] splitStringArray = splitInputString(input);
-			for (String eachInput : splitStringArray)
-				System.out.println("input test " + eachInput);
+			for (String inputDir : splitStringArray) {
+				System.out.println("");
+				System.out.println("  " + inputDir);
+				
+				rubiksCube = pushRubiks.getPushedRubiks(rubiksCube, inputDir);
+				// 결과값 출력
+				printResult(rubiksCube);
+			}
 		}
 		scanner.close();
 	}
@@ -115,7 +119,7 @@ public class PromptRubiks {
 		char[][] leftCube = { { 'O', 'O', 'O' }, { 'O', 'O', 'O' }, { 'O', 'O', 'O' } };
 		char[][] downCube = { { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' } };
 
-		char[][][] rubiksCube = { frontCube, rightCube, upCube, backCube, leftCube, downCube };
+		char[][][] rubiksCube = { backCube, upCube, leftCube, downCube, rightCube, frontCube };
 
 		PromptRubiks prompt = new PromptRubiks();
 
