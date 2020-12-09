@@ -2,6 +2,8 @@ package step2;
 
 import java.util.Scanner;
 
+import step1.PushOutWords;
+
 public class PromptCube {
 	
 	// 메소드: 평면큐브 모든 요소 출력
@@ -76,9 +78,10 @@ public class PromptCube {
 
 	public static void main(String[] args) {
 		// 초기값 선언
-		char[][] twoDimensionalCube = { { 'R', 'R', 'W' }, { 'R', 'R', 'W' }, { 'R', 'R', 'W' } };
+		char[][] twoDimensionalCube = { { 'R', 'R', 'W' }, { 'G', 'C', 'W' }, { 'G', 'B', 'B' } };
 		final int SIZE_OF_CUBE = twoDimensionalCube[0].length;
-
+		
+		
 		// prompt 실행
 		PromptCube prompt = new PromptCube();
 		prompt.executePrompt(twoDimensionalCube, SIZE_OF_CUBE);
