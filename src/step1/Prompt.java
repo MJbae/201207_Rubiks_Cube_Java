@@ -8,7 +8,6 @@ public class Prompt {
 		String inputString = "";
 		int inputCount = 0;
 		String inputDir = "";
-		String answer = "";
 
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("  단어, 회전시킬 문자의 수, 회전 방향 순으로 입력하십시오. (exit: -1) ");
@@ -25,6 +24,8 @@ public class Prompt {
 			inputString = inputSplit[0];
 			inputCount = Integer.parseInt(inputSplit[1]);
 			inputDir = inputSplit[2];
+			
+			char[] answer = new char[inputString.length()];
 
 			int lengthOfinputString = inputString.length();
 			PushOutWords pushWords = new PushOutWords();
@@ -46,7 +47,7 @@ public class Prompt {
 			}
 			
 			// 회전 결과 출력
-			System.out.println("  " + answer);
+			System.out.println("  " + String.valueOf(answer));
 			System.out.println("");
 		}
 		System.out.println("  Done");
