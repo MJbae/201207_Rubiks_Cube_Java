@@ -2,9 +2,9 @@ package step1;
 
 public class PushOutWords {
 	
-	// 오른쪽 방향으로 입력 받은 단어를 회전시키는 메소드
+	// 메소드: 오른쪽 방향으로 입력 받은 단어를 회전
 	public char[] getRightpushedString(char[] inputCharArray, int inputCount, int lengthOfinputString) {
-		// inputCharArray에 대해 마지막 요소를 맨 앞으로 옮기는 로직
+		// inputCharArray에 대해 마지막 요소를 맨 앞으로 이동
 		for (int i = lengthOfinputString; i > lengthOfinputString - inputCount; i--) {
 			char tempChar = inputCharArray[lengthOfinputString - 1];
 
@@ -17,9 +17,9 @@ public class PushOutWords {
 		return inputCharArray;
 	}
 	
-	// 왼쪽 방향으로 입력 받은 단어를 회전시키는 메소드
+	// 메소드: 왼쪽 방향으로 입력 받은 단어를 회전
 	public char[] getLeftpushedString(char[] inputCharArray, int inputCount, int lengthOfinputString) {
-		// inputCharArray에 대해 첫번째 요소를 마지막으로 옮기는 로직
+		// inputCharArray에 대해 첫번째 요소를 마지막으로 이동
 		for (int index = 0; index < inputCount; index++) {
 			char tempChar = inputCharArray[0];
 
