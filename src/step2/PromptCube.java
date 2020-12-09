@@ -3,7 +3,8 @@ package step2;
 import java.util.Scanner;
 
 public class PromptCube {
-
+	
+	// 메소드: 평면큐브 모든 요소 출력
 	public void printResult(char[][] twoDimensionalCube) {
 		for (char[] oneDimensionalCube : twoDimensionalCube) {
 			System.out.print("  ");
@@ -15,6 +16,7 @@ public class PromptCube {
 		System.out.println("");
 	}
 
+	// 메소드: 사용자 입력값을 유효한 명령으로 나누어 반환
 	public String[] splitInputString(String input) {
 
 		StringBuffer inputSplit = new StringBuffer(input);
@@ -63,7 +65,7 @@ public class PromptCube {
 				// 명령 실행 메소드
 				pushCube.getPushedCube(twoDimensionalCube, inputDir, SIZE_OF_CUBE);
 
-				// 출력: 각각의 명령 및 명령에 따른 결과물
+				// 각각의 명령 및 명령에 따른 결과물 출력
 				System.out.println("  " + inputDir);
 				prompt.printResult(twoDimensionalCube);
 			}
@@ -77,6 +79,7 @@ public class PromptCube {
 		char[][] twoDimensionalCube = { { 'R', 'R', 'W' }, { 'R', 'R', 'W' }, { 'R', 'R', 'W' } };
 		final int SIZE_OF_CUBE = twoDimensionalCube[0].length;
 
+		// prompt 실행
 		PromptCube prompt = new PromptCube();
 		prompt.executePrompt(twoDimensionalCube, SIZE_OF_CUBE);
 	}
