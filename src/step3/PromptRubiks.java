@@ -87,12 +87,26 @@ public class PromptRubiks {
 		}
 		return new String(inputSplit).split(" ");
 	}
-
+	
+	// 메소드: 조작 개수 카운트
+	public int countRotation(int count, String input) {
+		
+		if(input.contains("2")) {
+			count += 2;
+		} else if(input.contains("3")) {
+			count += 3;
+		} else {
+			count += 1;
+		}
+		
+		return count;
+	}
+	
 	// 메소드: 사용자 입력값 받고 결과물 출력
 	public void executePrompt(char[][][] rubiksCube) {
 		Scanner scanner = new Scanner(System.in);
 		PushRubiksCube pushRubiks = new PushRubiksCube();
-		int rotationCount = 0;
+		int numOfRotation = 0;
 		// 초기값 출력
 		printResult(rubiksCube);
 
@@ -107,9 +121,10 @@ public class PromptRubiks {
 
 			// inputSplit에 대해 공백문자 기준으로 분할하여 모든 명령어를 String array에 할당
 			String[] splitStringArray = splitInputString(input);
-			rotationCount += splitStringArray.length;
 			for (String inputDir : splitStringArray) {
-
+				
+				numOfRotation = countRotation(numOfRotation, inputDir);
+				
 				System.out.println("");
 				System.out.println("  " + inputDir);
 
@@ -121,7 +136,7 @@ public class PromptRubiks {
 			}
 		}
 		// 조작개수 출력
-		System.out.println("  조작개수: " + rotationCount);
+		System.out.println("  조작개수: " + numOfRotation);
 		System.out.println("  끝~ ");
 		scanner.close();
 	}
