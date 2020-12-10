@@ -10,7 +10,7 @@ public class PushRubiksCube {
 	public static final int FRONT_SIDE = 5;
 	public static final int NUM_OF_ROTATION = 4;
 	public static final int LENGTH_OF_ROW = 3;
-	
+
 	// 메소드: 사용자 입력값 중 주요 키워드의 포함여부를 기준으로 세부 호출메소드 호출
 	public char[][][] getPushedRubiks(char[][][] rubiksCube, String inputDir) {
 		char[][] tempCube = new char[NUM_OF_ROTATION][LENGTH_OF_ROW];
@@ -25,7 +25,7 @@ public class PushRubiksCube {
 
 		return rubiksCube;
 	}
-	
+
 	// 메소드: Right/Left Side의 Cube의 구체적인 회전동작을 기준으로 특정 메소드 호출
 	public char[][][] getRotatedRightLeft(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
 		switch (inputDir) {
@@ -42,6 +42,14 @@ public class PushRubiksCube {
 			break;
 		case "L'":
 			rubiksCube = getLeftCounterClockwise(rubiksCube, tempCube);
+			break;
+		case "R2":
+			rubiksCube = getRightClockwise(rubiksCube, tempCube);
+			rubiksCube = getRightClockwise(rubiksCube, tempCube);
+			break;
+		case "L2":
+			rubiksCube = getLeftClockwise(rubiksCube, tempCube);
+			rubiksCube = getLeftClockwise(rubiksCube, tempCube);
 			break;
 		default:
 			break;
@@ -67,6 +75,14 @@ public class PushRubiksCube {
 		case "B'":
 			rubiksCube = getBackCounterClockwise(rubiksCube, tempCube);
 			break;
+		case "F2":
+			rubiksCube = getFrontClockwise(rubiksCube, tempCube);
+			rubiksCube = getFrontClockwise(rubiksCube, tempCube);
+			break;
+		case "B2":
+			rubiksCube = getBackClockwise(rubiksCube, tempCube);
+			rubiksCube = getBackClockwise(rubiksCube, tempCube);
+			break;
 		default:
 			break;
 		}
@@ -90,13 +106,21 @@ public class PushRubiksCube {
 		case "D'":
 			rubiksCube = getDownCounterClockwise(rubiksCube, tempCube);
 			break;
+		case "U2":
+			rubiksCube = getUpClockwise(rubiksCube, tempCube);
+			rubiksCube = getUpClockwise(rubiksCube, tempCube);
+			break;
+		case "D2":
+			rubiksCube = getDownClockwise(rubiksCube, tempCube);
+			rubiksCube = getDownClockwise(rubiksCube, tempCube);
+			break;
 		default:
 			break;
 		}
 
 		return rubiksCube;
 	}
-	
+
 	public char[][][] getUpClockwise(char[][][] rubiksCube, char[][] tempCube) {
 		// tempCube에 각 side Cube의 첫번째행을 할당함
 		tempCube[0] = rubiksCube[LEFT_SIDE][0];
@@ -115,7 +139,7 @@ public class PushRubiksCube {
 
 		return rubiksCube;
 	}
-	
+
 	public char[][][] getUpCounterClockwise(char[][][] rubiksCube, char[][] tempCube) {
 		// tempCube에 각 side Cube의 첫번째행을 할당함
 		tempCube[0] = rubiksCube[LEFT_SIDE][0];
@@ -134,7 +158,7 @@ public class PushRubiksCube {
 
 		return rubiksCube;
 	}
-	
+
 	public char[][][] getDownCounterClockwise(char[][][] rubiksCube, char[][] tempCube) {
 		// tempCube에 각 side Cube의 마지막행을 할당함
 		tempCube[0] = rubiksCube[LEFT_SIDE][2];
@@ -153,7 +177,7 @@ public class PushRubiksCube {
 
 		return rubiksCube;
 	}
-	
+
 	public char[][][] getDownClockwise(char[][][] rubiksCube, char[][] tempCube) {
 		// tempCube에 각 side Cube의 마지막행 할당함
 		tempCube[0] = rubiksCube[LEFT_SIDE][2];
@@ -172,7 +196,7 @@ public class PushRubiksCube {
 
 		return rubiksCube;
 	}
-	
+
 	public char[][][] getFrontClockwise(char[][][] rubiksCube, char[][] tempCube) {
 		// tempCube에 각 side Cube의 마지막행을 할당함
 		tempCube[0] = rubiksCube[LEFT_SIDE][2];
