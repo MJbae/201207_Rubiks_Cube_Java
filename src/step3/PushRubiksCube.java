@@ -49,14 +49,26 @@ public class PushRubiksCube {
 	public char[][][] getDoubleRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
 		switch (inputDir) {
 		case "U2":
-			break;
+			rubiksCube = getUpsideRotated(rubiksCube, tempCube, "U");
+			return rubiksCube = getUpsideRotated(rubiksCube, tempCube, "U");
 		case "D2":
-			break;
+			rubiksCube = getDownsideRotated(rubiksCube, tempCube, "D");
+			return rubiksCube = getDownsideRotated(rubiksCube, tempCube, "D");
+		case "L2":
+			rubiksCube = getLeftsideRotated(rubiksCube, tempCube, "L");
+			return rubiksCube = getLeftsideRotated(rubiksCube, tempCube, "L");
+		case "R2":
+			rubiksCube = getRightsideRotated(rubiksCube, tempCube, "R");
+			return rubiksCube = getRightsideRotated(rubiksCube, tempCube, "R");
+		case "F2":
+			rubiksCube = getFrontsideRotated(rubiksCube, tempCube, "F");
+			return rubiksCube = getFrontsideRotated(rubiksCube, tempCube, "F");
+		case "B2":
+			rubiksCube = getBacksideRotated(rubiksCube, tempCube, "B");
+			return rubiksCube = getBacksideRotated(rubiksCube, tempCube, "B");
 		default:
-			break;
+			return rubiksCube;
 		}
-
-		return rubiksCube;
 	}
 
 	public char[][][] getUpsideRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
