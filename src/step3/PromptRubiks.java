@@ -1,16 +1,22 @@
 package step3;
 
-import step2.*;
 import java.util.Scanner;
 
 public class PromptRubiks {
+	
 	// 메소드: Rubiks Cube 전체 출력
 	public void printResult(char[][][] threeDimensionalCube) {
+		int BACK_SIDE = PushRubiksCube.BACK_SIDE;
+		int UP_SIDE = PushRubiksCube.UP_SIDE;
+		int LEFT_SIDE = PushRubiksCube.LEFT_SIDE;
+		int DOWN_SIDE = PushRubiksCube.DOWN_SIDE;
+		int RIGHT_SIDE = PushRubiksCube.RIGHT_SIDE;
+		int FRONT_SIDE = PushRubiksCube.FRONT_SIDE;
 
-		final int LENGTH_OF_CUBE = threeDimensionalCube[0][0].length;
+		final int LENGTH_OF_CUBE = threeDimensionalCube[BACK_SIDE][0].length;
 
-		// frontCube 출력
-		for (char[] oneDimensionalCube : threeDimensionalCube[0]) {
+		// back side cube 출력
+		for (char[] oneDimensionalCube : threeDimensionalCube[BACK_SIDE]) {
 			System.out.print("                  ");
 			for (char elementOfCube : oneDimensionalCube) {
 				System.out.print(elementOfCube + " ");
@@ -22,34 +28,34 @@ public class PromptRubiks {
 		for (int i = 0; i < LENGTH_OF_CUBE; i++) {
 			System.out.print("  ");
 
-			// rightCube 출력
-			for (char elementOfCube : threeDimensionalCube[1][i]) {
+			// up side cube 출력
+			for (char elementOfCube : threeDimensionalCube[UP_SIDE][i]) {
 				System.out.print(elementOfCube + " ");
 			}
 			System.out.print("  ");
 
-			// upCube 출력
-			for (char elementOfCube : threeDimensionalCube[2][i]) {
+			// left side cube 출력
+			for (char elementOfCube : threeDimensionalCube[LEFT_SIDE][i]) {
 				System.out.print(elementOfCube + " ");
 			}
 			System.out.print("  ");
 
-			// backCube 출력
-			for (char elementOfCube : threeDimensionalCube[3][i]) {
+			// down side cube 출력
+			for (char elementOfCube : threeDimensionalCube[DOWN_SIDE][i]) {
 				System.out.print(elementOfCube + " ");
 			}
 			System.out.print("  ");
 
-			// leftCube 출력
-			for (char elementOfCube : threeDimensionalCube[4][i]) {
+			// right side cube 출력
+			for (char elementOfCube : threeDimensionalCube[RIGHT_SIDE][i]) {
 				System.out.print(elementOfCube + " ");
 			}
 			System.out.println("");
 		}
 		System.out.println("");
 
-		// downCube 출력
-		for (char[] oneDimensionalCube : threeDimensionalCube[5]) {
+		// front side cube 출력
+		for (char[] oneDimensionalCube : threeDimensionalCube[FRONT_SIDE]) {
 			System.out.print("                  ");
 			for (char elementOfCube : oneDimensionalCube) {
 				System.out.print(elementOfCube + " ");

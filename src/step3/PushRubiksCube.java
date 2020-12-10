@@ -2,16 +2,19 @@ package step3;
 
 public class PushRubiksCube {
 
-	private static final int BACK_SIDE = 0;
-	private static final int UP_SIDE = 1;
-	private static final int LEFT_SIDE = 2;
-	private static final int DOWN_SIDE = 3;
-	private static final int RIGHT_SIDE = 4;
-	private static final int FRONT_SIDE = 5;
+	public static final int BACK_SIDE = 0;
+	public static final int UP_SIDE = 1;
+	public static final int LEFT_SIDE = 2;
+	public static final int DOWN_SIDE = 3;
+	public static final int RIGHT_SIDE = 4;
+	public static final int FRONT_SIDE = 5;
+	public static final int NUM_OF_ROTATION = 4;
+	public static final int LENGTH_OF_ROW = 3;
+	
 	
 	// 메소드: 사용자 입력값 중 주요 키워드의 포함여부를 기준으로 세부 호출메소드 호출
 	public char[][][] getPushedRubiks(char[][][] rubiksCube, String inputDir) {
-		char[][] tempCube = new char[4][3];
+		char[][] tempCube = new char[NUM_OF_ROTATION][LENGTH_OF_ROW];
 
 		if (inputDir.contains("R") || inputDir.contains("L")) {
 			rubiksCube = getRotatedRightLeft(rubiksCube, tempCube, inputDir);
