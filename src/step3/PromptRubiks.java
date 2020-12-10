@@ -3,7 +3,7 @@ package step3;
 import java.util.Scanner;
 
 public class PromptRubiks {
-	public static int numOfRotation = 0;
+	private static int numOfRotation = 0;
 
 	// 메소드: Rubiks Cube 전체 출력
 	public void printResult(char[][][] threeDimensionalCube) {
