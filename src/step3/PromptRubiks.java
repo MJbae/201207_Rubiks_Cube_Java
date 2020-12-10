@@ -3,7 +3,7 @@ package step3;
 import java.util.Scanner;
 
 public class PromptRubiks {
-	
+
 	// 메소드: Rubiks Cube 전체 출력
 	public void printResult(char[][][] threeDimensionalCube) {
 		int BACK_SIDE = PushRubiksCube.BACK_SIDE;
@@ -87,25 +87,66 @@ public class PromptRubiks {
 		}
 		return new String(inputSplit).split(" ");
 	}
-	
+
 	// 메소드: 조작 개수 카운트
 	public int countRotation(int count, String input) {
-		
-		if(input.contains("2")) {
+
+		if (input.contains("2")) {
 			count += 2;
-		} else if(input.contains("3")) {
+		} else if (input.contains("3")) {
 			count += 3;
 		} else {
 			count += 1;
 		}
-		
+
 		return count;
 	}
-	
+
+	public boolean isValidInput(String input) {
+		boolean isValid = false;
+
+		String[] validInputs = { "R", "R'", "L", "L'", "U", "U'", "D", "D'", "F", "F'", "B", "B'", "R2", "L2", "U2",
+				"D2", "F2", "B2" };
+
+		for (String eachInput : validInputs) {
+			if (input.equals(eachInput)) {
+				isValid = true;
+				break;
+			}
+		}
+
+		return isValid;
+	}
+
+	public char[][][] runRotation(char[][][] rubiksCube, String[] splitStringArray, int numOfRotation) {
+
+		PushRubiksCube pushRubiks = new PushRubiksCube();
+
+		for (String inputDir : splitStringArray) {
+			// 각 입력값의 유효성 체크
+			if (!isValidInput(inputDir)) {
+				System.out.println("  " + inputDir + ": 유효하지 않은 입력값입니다");
+				break;
+			}
+
+			// 입력개수 카운팅
+			numOfRotation = countRotation(numOfRotation, inputDir);
+
+			System.out.println("");
+			System.out.println("  " + inputDir);
+
+			// 유효 입력에 따라 Rubiks Cube 회전
+			rubiksCube = pushRubiks.getPushedRubiks(rubiksCube, inputDir);
+
+			printResult(rubiksCube);
+		}
+
+		return rubiksCube;
+	}
+
 	// 메소드: 사용자 입력값 받고 결과물 출력
 	public void executePrompt(char[][][] rubiksCube) {
 		Scanner scanner = new Scanner(System.in);
-		PushRubiksCube pushRubiks = new PushRubiksCube();
 		int numOfRotation = 0;
 		// 초기값 출력
 		printResult(rubiksCube);
@@ -119,21 +160,12 @@ public class PromptRubiks {
 			if (input.equals("Q"))
 				break;
 
-			// inputSplit에 대해 공백문자 기준으로 분할하여 모든 명령어를 String array에 할당
+			// 입력값을 구분하여 String array에 할당
 			String[] splitStringArray = splitInputString(input);
-			for (String inputDir : splitStringArray) {
-				
-				numOfRotation = countRotation(numOfRotation, inputDir);
-				
-				System.out.println("");
-				System.out.println("  " + inputDir);
+			
+			// 각각의 입력에 대한 반복실행
+			rubiksCube = runRotation(rubiksCube, splitStringArray, numOfRotation);
 
-				rubiksCube = pushRubiks.getPushedRubiks(rubiksCube, inputDir);
-
-				// 결과값 출력
-				printResult(rubiksCube);
-
-			}
 		}
 		// 조작개수 출력
 		System.out.println("  조작개수: " + numOfRotation);
