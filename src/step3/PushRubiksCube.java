@@ -24,10 +24,7 @@ public class PushRubiksCube {
 		if (inputDir.contains("2")) {
 			return rubiksCube = getDoubleRotated(rubiksCube, tempCube, inputDir);
 
-		} else if (inputDir.contains("R")) {
-			return rubiksCube = getRightLeftRotated(rubiksCube, tempCube, inputDir);
-
-		} else if (inputDir.contains("L")) {
+		} else if (inputDir.contains("R") || inputDir.contains("L")) {
 			return rubiksCube = getRightLeftRotated(rubiksCube, tempCube, inputDir);
 
 		} else if (inputDir.contains("F") || inputDir.contains("B")) {
@@ -43,26 +40,20 @@ public class PushRubiksCube {
 
 	// 메소드: Up/Down Side의 Cube의 구체적인 회전동작을 기준으로 특정 메소드 호출
 	public char[][][] getDoubleRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
-		switch (inputDir) {
-		case "U2":
-			rubiksCube = getUpDownRotated(rubiksCube, tempCube, "U");
-			return rubiksCube = getUpDownRotated(rubiksCube, tempCube, "U");
-		case "D2":
-			rubiksCube = getUpDownRotated(rubiksCube, tempCube, "D");
-			return rubiksCube = getUpDownRotated(rubiksCube, tempCube, "D");
-		case "L2":
-			rubiksCube = getRightLeftRotated(rubiksCube, tempCube, "L");
-			return rubiksCube = getRightLeftRotated(rubiksCube, tempCube, "L");
-		case "R2":
-			rubiksCube = getRightLeftRotated(rubiksCube, tempCube, "R");
-			return rubiksCube = getRightLeftRotated(rubiksCube, tempCube, "R");
-		case "F2":
-			rubiksCube = getFrontBackRotated(rubiksCube, tempCube, "F");
-			return rubiksCube = getFrontBackRotated(rubiksCube, tempCube, "F");
-		case "B2":
-			rubiksCube = getFrontBackRotated(rubiksCube, tempCube, "B");
-			return rubiksCube = getFrontBackRotated(rubiksCube, tempCube, "B");
-		default:
+
+		if (inputDir.equals("R2") || inputDir.equals("L2")) {
+			rubiksCube = getRightLeftRotated(rubiksCube, tempCube, inputDir);
+			return rubiksCube = getRightLeftRotated(rubiksCube, tempCube, inputDir);
+
+		} else if (inputDir.equals("F2") || inputDir.equals("B2")) {
+			rubiksCube = getFrontBackRotated(rubiksCube, tempCube, inputDir);
+			return rubiksCube = getFrontBackRotated(rubiksCube, tempCube, inputDir);
+
+		} else if (inputDir.equals("U2") || inputDir.equals("D2")) {
+			rubiksCube = getUpDownRotated(rubiksCube, tempCube, inputDir);
+			return rubiksCube = getUpDownRotated(rubiksCube, tempCube, inputDir);
+
+		} else {
 			return rubiksCube;
 		}
 	}
