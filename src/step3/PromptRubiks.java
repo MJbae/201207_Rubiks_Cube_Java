@@ -3,6 +3,7 @@ package step3;
 import java.util.Scanner;
 
 public class PromptRubiks {
+	public static int numOfRotation = 0;
 
 	// 메소드: Rubiks Cube 전체 출력
 	public void printResult(char[][][] threeDimensionalCube) {
@@ -89,17 +90,14 @@ public class PromptRubiks {
 	}
 
 	// 메소드: 조작 개수 카운트
-	public int countRotation(int count, String input) {
-
+	public void countRotation(String input) {
 		if (input.contains("2")) {
-			count += 2;
+			numOfRotation += 2;
 		} else if (input.contains("3")) {
-			count += 3;
+			numOfRotation += 3;
 		} else {
-			count += 1;
+			numOfRotation += 1;
 		}
-
-		return count;
 	}
 
 	public boolean isValidInput(String input) {
@@ -130,7 +128,7 @@ public class PromptRubiks {
 			}
 
 			// 입력개수 카운팅
-			numOfRotation = countRotation(numOfRotation, inputDir);
+			countRotation(inputDir);
 
 			System.out.println("");
 			System.out.println("  " + inputDir);
@@ -147,7 +145,7 @@ public class PromptRubiks {
 	// 메소드: 사용자 입력값 받고 결과물 출력
 	public void executePrompt(char[][][] rubiksCube) {
 		Scanner scanner = new Scanner(System.in);
-		int numOfRotation = 0;
+		
 		// 초기값 출력
 		printResult(rubiksCube);
 
