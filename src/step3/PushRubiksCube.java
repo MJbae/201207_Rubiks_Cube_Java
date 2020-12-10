@@ -11,7 +11,6 @@ public class PushRubiksCube {
 	public static final int NUM_OF_ROTATION = 4;
 	public static final int LENGTH_OF_ROW = 3;
 	
-	
 	// 메소드: 사용자 입력값 중 주요 키워드의 포함여부를 기준으로 세부 호출메소드 호출
 	public char[][][] getPushedRubiks(char[][][] rubiksCube, String inputDir) {
 		char[][] tempCube = new char[NUM_OF_ROTATION][LENGTH_OF_ROW];
