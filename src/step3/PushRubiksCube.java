@@ -42,16 +42,16 @@ public class PushRubiksCube {
 	public char[][][] getDoubleRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
 
 		if (inputDir.equals("R2") || inputDir.equals("L2")) {
-			rubiksCube = getRightLeftRotated(rubiksCube, tempCube, inputDir);
-			return rubiksCube = getRightLeftRotated(rubiksCube, tempCube, inputDir);
+			rubiksCube = getRightLeftRotated(rubiksCube, tempCube, inputDir.substring(0, 1));
+			return rubiksCube = getRightLeftRotated(rubiksCube, tempCube, inputDir.substring(0, 1));
 
 		} else if (inputDir.equals("F2") || inputDir.equals("B2")) {
-			rubiksCube = getFrontBackRotated(rubiksCube, tempCube, inputDir);
-			return rubiksCube = getFrontBackRotated(rubiksCube, tempCube, inputDir);
+			rubiksCube = getFrontBackRotated(rubiksCube, tempCube, inputDir.substring(0, 1));
+			return rubiksCube = getFrontBackRotated(rubiksCube, tempCube, inputDir.substring(0, 1));
 
 		} else if (inputDir.equals("U2") || inputDir.equals("D2")) {
-			rubiksCube = getUpDownRotated(rubiksCube, tempCube, inputDir);
-			return rubiksCube = getUpDownRotated(rubiksCube, tempCube, inputDir);
+			rubiksCube = getUpDownRotated(rubiksCube, tempCube, inputDir.substring(0, 1));
+			return rubiksCube = getUpDownRotated(rubiksCube, tempCube, inputDir.substring(0, 1));
 
 		} else {
 			return rubiksCube;
