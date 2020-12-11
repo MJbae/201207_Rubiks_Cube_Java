@@ -1,57 +1,61 @@
-//ÇÙ½É ¾ÆÀÌµğ¾î
-//1. 2Â÷¿ø ¹è¿­À» È°¿ëÇÏ¿© ÃÊ±â°ªÀ» ÇÒ´ç
-//2. °¡Àå ¿ŞÂÊ ¹× ¿À¸¥ÂÊ È¸Àü ±¸Çö
-//3. °¡Àå À§ÂÊ ¹× ¾Æ·¡ÂÊ È¸Àü ±¸Çö
-//TODO: ÀÚ¹Ù¿¡¼­ ¸Ş¼Òµå¸¦ ¸Å°³º¯¼ö·Î Àü´ŞÇÏ´Â ¹æ¹ı ÇĞ½À ÈÄ R,R',L,L' Áßº¹ÄÚµå Á¦°ÅÇÏ±â
-
 package step2;
 
 import step1.*;
 
 public class PushTwoDimensionalCube {
-	//TODO: ÀÚ¹Ù¿¡¼­ ¸Ş¼Òµå¸¦ ¸Å°³º¯¼ö·Î Àü´ŞÇÏ´Â ¹æ¹ı ÇĞ½À ÈÄ R,R',L,L' Áßº¹ÄÚµå Á¦°ÅÇÏ±â
+	// TODO: ìë°”ì—ì„œ ë©”ì†Œë“œë¥¼ ë§¤ê°œë³€ìˆ˜ë¡œ ì „ë‹¬í•˜ëŠ” ë°©ë²• í•™ìŠµ í›„ R,R',L,L' ì¤‘ë³µì½”ë“œ ì œê±°í•˜ê¸°
 	public char[][] getPushedCube(char[][] twoDimensionalCube, String inputDir, int SIZE_OF_CUBE) {
-		
+
 		PushOutWords pushWords = new PushOutWords();
 		char[] tempCube = new char[SIZE_OF_CUBE];
 
-		switch(inputDir) {
+		switch (inputDir) {
 		case "U":
 			twoDimensionalCube[0] = pushWords.getLeftpushedString(twoDimensionalCube[0], 1, SIZE_OF_CUBE);
 			break;
 		case "U'":
-			twoDimensionalCube[0]= pushWords.getRightpushedString(twoDimensionalCube[0], 1, SIZE_OF_CUBE);
+			twoDimensionalCube[0] = pushWords.getRightpushedString(twoDimensionalCube[0], 1, SIZE_OF_CUBE);
 			break;
 		case "R":
-			for(int i = 0; i < SIZE_OF_CUBE; i++) tempCube[i] = twoDimensionalCube[i][SIZE_OF_CUBE - 1];
+			for (int i = 0; i < SIZE_OF_CUBE; i++)
+				tempCube[i] = twoDimensionalCube[i][SIZE_OF_CUBE - 1];
 			tempCube = pushWords.getLeftpushedString(tempCube, 1, SIZE_OF_CUBE);
-			for(int j = 0; j < SIZE_OF_CUBE; j++) twoDimensionalCube[j][SIZE_OF_CUBE - 1] = tempCube[j];
+			for (int j = 0; j < SIZE_OF_CUBE; j++)
+				twoDimensionalCube[j][SIZE_OF_CUBE - 1] = tempCube[j];
 			break;
 		case "R'":
-			for(int i = 0; i < SIZE_OF_CUBE; i++) tempCube[i] = twoDimensionalCube[i][SIZE_OF_CUBE - 1];
+			for (int i = 0; i < SIZE_OF_CUBE; i++)
+				tempCube[i] = twoDimensionalCube[i][SIZE_OF_CUBE - 1];
 			tempCube = pushWords.getRightpushedString(tempCube, 1, SIZE_OF_CUBE);
-			for(int j = 0; j < SIZE_OF_CUBE; j++) twoDimensionalCube[j][SIZE_OF_CUBE - 1] = tempCube[j];
+			for (int j = 0; j < SIZE_OF_CUBE; j++)
+				twoDimensionalCube[j][SIZE_OF_CUBE - 1] = tempCube[j];
 			break;
 		case "L":
-			for(int i = 0; i < SIZE_OF_CUBE; i++) tempCube[i] = twoDimensionalCube[i][0];
+			for (int i = 0; i < SIZE_OF_CUBE; i++)
+				tempCube[i] = twoDimensionalCube[i][0];
 			tempCube = pushWords.getRightpushedString(tempCube, 1, SIZE_OF_CUBE);
-			for(int j = 0; j < SIZE_OF_CUBE; j++) twoDimensionalCube[j][0] = tempCube[j];
+			for (int j = 0; j < SIZE_OF_CUBE; j++)
+				twoDimensionalCube[j][0] = tempCube[j];
 			break;
 		case "L'":
-			for(int i = 0; i < SIZE_OF_CUBE; i++) tempCube[i] = twoDimensionalCube[i][0];
+			for (int i = 0; i < SIZE_OF_CUBE; i++)
+				tempCube[i] = twoDimensionalCube[i][0];
 			tempCube = pushWords.getLeftpushedString(tempCube, 1, SIZE_OF_CUBE);
-			for(int j = 0; j < SIZE_OF_CUBE; j++) twoDimensionalCube[j][0] = tempCube[j];
+			for (int j = 0; j < SIZE_OF_CUBE; j++)
+				twoDimensionalCube[j][0] = tempCube[j];
 			break;
 		case "B":
-			twoDimensionalCube[SIZE_OF_CUBE - 1] = pushWords.getLeftpushedString(twoDimensionalCube[SIZE_OF_CUBE - 1], 1, SIZE_OF_CUBE);
+			twoDimensionalCube[SIZE_OF_CUBE - 1] = pushWords.getLeftpushedString(twoDimensionalCube[SIZE_OF_CUBE - 1],
+					1, SIZE_OF_CUBE);
 			break;
 		case "B'":
-			twoDimensionalCube[SIZE_OF_CUBE - 1] = pushWords.getRightpushedString(twoDimensionalCube[SIZE_OF_CUBE - 1], 1, SIZE_OF_CUBE);
+			twoDimensionalCube[SIZE_OF_CUBE - 1] = pushWords.getRightpushedString(twoDimensionalCube[SIZE_OF_CUBE - 1],
+					1, SIZE_OF_CUBE);
 			break;
 		default:
 			break;
 		}
-		
+
 		return twoDimensionalCube;
 	}
 }

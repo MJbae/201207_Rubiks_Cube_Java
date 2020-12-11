@@ -2,11 +2,9 @@ package step2;
 
 import java.util.Scanner;
 
-import step1.PushOutWords;
-
 public class PromptCube {
-	
-	// ¸Ş¼Òµå: Æò¸éÅ¥ºê ¸ğµç ¿ä¼Ò Ãâ·Â
+
+	// ë©”ì†Œë“œ: í‰ë©´íë¸Œ ëª¨ë“  ìš”ì†Œ ì¶œë ¥
 	public void printResult(char[][] twoDimensionalCube) {
 		for (char[] oneDimensionalCube : twoDimensionalCube) {
 			System.out.print("  ");
@@ -18,27 +16,27 @@ public class PromptCube {
 		System.out.println("");
 	}
 
-	// ¸Ş¼Òµå: »ç¿ëÀÚ ÀÔ·Â°ªÀ» À¯È¿ÇÑ ¸í·ÉÀ¸·Î ³ª´©¾î ¹İÈ¯
+	// ë©”ì†Œë“œ: ì‚¬ìš©ì ì…ë ¥ê°’ì„ ìœ íš¨í•œ ëª…ë ¹ìœ¼ë¡œ ë‚˜ëˆ„ì–´ ë°˜í™˜
 	public String[] splitInputString(String input) {
 
 		StringBuffer inputSplit = new StringBuffer(input);
 		int indexOfSplit = 1;
-		
-		// String inputÀÇ °¢ ¹®ÀÚ¿¡ ´ëÇØ ¼øÈ¸
+
+		// String inputì˜ ê° ë¬¸ìì— ëŒ€í•´ ìˆœíšŒ
 		for (int i = 0; i < input.length() - 1; i++) {
-			// ÀÛÀºµû¿ÈÇ¥°¡ ÀÖ´Â °æ¿ì, ÀÛÀº µû¿ÈÇ¥ ±âÁØ ¿ìÃø¿¡ °ø¹é ¹®ÀÚ »ğÀÔ
+			// ì‘ì€ë”°ì˜´í‘œê°€ ìˆëŠ” ê²½ìš°, ì‘ì€ ë”°ì˜´í‘œ ê¸°ì¤€ ìš°ì¸¡ì— ê³µë°± ë¬¸ì ì‚½ì…
 			if (input.charAt(i + 1) == 39) {
 				indexOfSplit += 1;
 				inputSplit.insert(indexOfSplit, " ");
 				i++;
 				indexOfSplit += 2;
-				// ÀÏ¹İ ¹®ÀÚ(ÀÛÀºµû¿ÈÇ¥°¡ ¾ø´Â)ÀÏ °æ¿ì, ´ÙÀ½ ¹®ÀÚ¿¡ ÀÛÀº µû¿ÈÇ¥°¡ ¾ø´Ù¸é ¹®ÀÚ ±âÁØ ¿ìÃø¿¡ °ø¹é ¹®ÀÚ »ğÀÔ
+				// ì¼ë°˜ ë¬¸ì(ì‘ì€ë”°ì˜´í‘œê°€ ì—†ëŠ”)ì¼ ê²½ìš°, ë‹¤ìŒ ë¬¸ìì— ì‘ì€ ë”°ì˜´í‘œê°€ ì—†ë‹¤ë©´ ë¬¸ì ê¸°ì¤€ ìš°ì¸¡ì— ê³µë°± ë¬¸ì ì‚½ì…
 			} else {
 				inputSplit.insert(indexOfSplit, " ");
 				indexOfSplit += 2;
 			}
 		}
-		
+
 		return new String(inputSplit).split(" ");
 	}
 
@@ -47,27 +45,27 @@ public class PromptCube {
 		PromptCube prompt = new PromptCube();
 		PushTwoDimensionalCube pushCube = new PushTwoDimensionalCube();
 
-		// ÃÊ±â°ª Ãâ·Â
+		// ì´ˆê¸°ê°’ ì¶œë ¥
 		prompt.printResult(twoDimensionalCube);
 
 		while (true) {
-			// »ç¿ëÀÚ ÀÔ·Â
+			// ì‚¬ìš©ì ì…ë ¥
 			System.out.print("  CUBE> ");
 			String input = scanner.nextLine();
-			// ½ÇÇà Áß´Ü ·ÎÁ÷
+			// ì‹¤í–‰ ì¤‘ë‹¨ ë¡œì§
 			if (input.equals("Q"))
 				break;
 
-			// inputSplit¿¡ ´ëÇØ °ø¹é¹®ÀÚ ±âÁØÀ¸·Î ºĞÇÒÇÏ¿© ¸ğµç ¸í·É¾î¸¦ String array¿¡ ÇÒ´ç
+			// inputSplitì— ëŒ€í•´ ê³µë°±ë¬¸ì ê¸°ì¤€ìœ¼ë¡œ ë¶„í• í•˜ì—¬ ëª¨ë“  ëª…ë ¹ì–´ë¥¼ String arrayì— í• ë‹¹
 			String[] splitStringArray = splitInputString(input);
 
 			System.out.println("");
-			// °¢°¢ÀÇ ¸í·É ¼öÇà
+			// ê°ê°ì˜ ëª…ë ¹ ìˆ˜í–‰
 			for (String inputDir : splitStringArray) {
-				// ¸í·É ½ÇÇà ¸Ş¼Òµå
+				// ëª…ë ¹ ì‹¤í–‰ ë©”ì†Œë“œ
 				pushCube.getPushedCube(twoDimensionalCube, inputDir, SIZE_OF_CUBE);
 
-				// °¢°¢ÀÇ ¸í·É ¹× ¸í·É¿¡ µû¸¥ °á°ú¹° Ãâ·Â
+				// ê°ê°ì˜ ëª…ë ¹ ë° ëª…ë ¹ì— ë”°ë¥¸ ê²°ê³¼ë¬¼ ì¶œë ¥
 				System.out.println("  " + inputDir);
 				prompt.printResult(twoDimensionalCube);
 			}
@@ -77,12 +75,11 @@ public class PromptCube {
 	}
 
 	public static void main(String[] args) {
-		// ÃÊ±â°ª ¼±¾ğ
+		// ì´ˆê¸°ê°’ ì„ ì–¸
 		char[][] twoDimensionalCube = { { 'R', 'R', 'W' }, { 'G', 'C', 'W' }, { 'G', 'B', 'B' } };
 		final int SIZE_OF_CUBE = twoDimensionalCube[0].length;
-		
-		
-		// prompt ½ÇÇà
+
+		// prompt ì‹¤í–‰
 		PromptCube prompt = new PromptCube();
 		prompt.executePrompt(twoDimensionalCube, SIZE_OF_CUBE);
 	}
