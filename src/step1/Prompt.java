@@ -3,6 +3,7 @@ package step1;
 import java.util.Scanner;
 
 public class Prompt {
+	// 메소드: 입력 받은 정수의 유효범위 체크
 	public boolean checkValidInt(int inputNum) {
 		if (inputNum < -100 || inputNum >= 100) {
 			System.out.println("  입력 받은 정수 " + inputNum + "은(는) 유효하지 않습니다.");
@@ -11,6 +12,7 @@ public class Prompt {
 		return true;
 	}
 
+	// 메소드: 전체로직(사용자 입력부터 결과물 출력까지)에 대해 실행
 	public void executePrompt() {
 		int inputCount = 0;
 		String inputDir = "";
@@ -20,10 +22,8 @@ public class Prompt {
 
 		while (true) {
 			System.out.print("  > ");
-
 			String input = scanner.nextLine();
 
-			// -1 입력 시 반복문 탈출
 			if (input.equals("-1"))
 				break;
 
@@ -43,9 +43,8 @@ public class Prompt {
 
 			PushOutWords pushWords = new PushOutWords();
 			// 사용자 입력값을 토대로 문자를 밀어낸 결과를 반환
-			char[] resultOfPushed = pushWords.getPushed(inputCharArray, inputCount, inputDir, inputCharArray.length);
+			char[] resultOfPushed = pushWords.getPushed(inputCharArray, inputCount, inputDir);
 
-			// 결과 출력
 			System.out.println("  " + String.valueOf(resultOfPushed));
 			System.out.println("");
 		}
