@@ -3,7 +3,7 @@
 * 사용자 입력(String)을 StringBuffer에 할당하여 각 문자(char)에 접근
 * 작은따옴표(single quote)가 뒤에 붙는 문자의 경우, 작은 따옴표 뒤에 공백(" ") 추가
 * 일반문자(작은따옴표가 뒤에 붙지 않은)의 경우, 문자 바로 뒤에 공백(" ") 추가
-* 공백을 추가한 StringBuffer에 대해 공백을 기준으로 String array 각 요소에 할당(split)
+* 공백을 추가한 StringBuffer에 대해 공백을 기준으로 String array 각 요소에 할당
 
 ### 2. U, U', B, B' 로직 구현
 
