@@ -14,23 +14,11 @@ public class PushTwoDimensionalCube {
 			 twoDimensionalCube[0] = getUpBottomPushed(twoDimensionalCube[0], SIZE_OF_CUBE, inputDir);
 		 } else if(inputDir.contains("B")) {
 			 twoDimensionalCube[SIZE_OF_CUBE - 1] = getUpBottomPushed(twoDimensionalCube[SIZE_OF_CUBE - 1], SIZE_OF_CUBE, inputDir);
-		 }
+		 } else if(inputDir.contains("L")) {
+			 twoDimensionalCube = getLeftPushed(twoDimensionalCube, SIZE_OF_CUBE, inputDir, tempCube);
+		 } 
 		 
 		switch (inputDir) {
-//		case "U":
-//			twoDimensionalCube[0] = pushWords.getLeftpushedString(twoDimensionalCube[0], 1, SIZE_OF_CUBE);
-//			break;
-//		case "U'":
-//			twoDimensionalCube[0] = pushWords.getRightpushedString(twoDimensionalCube[0], 1, SIZE_OF_CUBE);
-//			break;
-//		case "B":
-//			twoDimensionalCube[SIZE_OF_CUBE - 1] = pushWords.getLeftpushedString(twoDimensionalCube[SIZE_OF_CUBE - 1],
-//					1, SIZE_OF_CUBE);
-//			break;
-//		case "B'":
-//			twoDimensionalCube[SIZE_OF_CUBE - 1] = pushWords.getRightpushedString(twoDimensionalCube[SIZE_OF_CUBE - 1],
-//					1, SIZE_OF_CUBE);
-//			break;
 		case "R":
 			for (int i = 0; i < SIZE_OF_CUBE; i++)
 				tempCube[i] = twoDimensionalCube[i][SIZE_OF_CUBE - 1];
@@ -45,25 +33,31 @@ public class PushTwoDimensionalCube {
 			for (int j = 0; j < SIZE_OF_CUBE; j++)
 				twoDimensionalCube[j][SIZE_OF_CUBE - 1] = tempCube[j];
 			break;
-		case "L":
-			for (int i = 0; i < SIZE_OF_CUBE; i++)
-				tempCube[i] = twoDimensionalCube[i][0];
-			tempCube = pushWords.getRightpushedString(tempCube, 1, SIZE_OF_CUBE);
-			for (int j = 0; j < SIZE_OF_CUBE; j++)
-				twoDimensionalCube[j][0] = tempCube[j];
-			break;
-		case "L'":
-			for (int i = 0; i < SIZE_OF_CUBE; i++)
-				tempCube[i] = twoDimensionalCube[i][0];
-			tempCube = pushWords.getLeftpushedString(tempCube, 1, SIZE_OF_CUBE);
-			for (int j = 0; j < SIZE_OF_CUBE; j++)
-				twoDimensionalCube[j][0] = tempCube[j];
-			break;
 		default:
 			break;
 		}
 
 		return twoDimensionalCube;
+	}
+	
+	public char[][] getLeftPushed(char[][] inputArray, int SIZE_OF_CUBE, String inputDir, char[] tempCube) {
+		PushOutWords pushWords = new PushOutWords();
+
+		for (int i = 0; i < SIZE_OF_CUBE; i++)
+			tempCube[i] = inputArray[i][0];
+		
+		if (inputDir.equals("L")) {
+			tempCube = pushWords.getRightpushedString(tempCube, 1, SIZE_OF_CUBE);
+		} else if (inputDir.equals("L'")) {
+			tempCube = pushWords.getLeftpushedString(tempCube, 1, SIZE_OF_CUBE);
+		} else {
+			inputArray = null;
+		}
+		
+		for (int j = 0; j < SIZE_OF_CUBE; j++)
+			inputArray[j][0] = tempCube[j];
+		
+		return inputArray;
 	}
 
 	public char[] getUpBottomPushed(char[] inputArray, int SIZE_OF_CUBE, String inputDir) {
