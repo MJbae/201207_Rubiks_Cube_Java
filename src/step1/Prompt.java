@@ -3,22 +3,22 @@ package step1;
 import java.util.Scanner;
 
 public class Prompt {
-	// ¸Ş¼Òµå: ÀÔ·Â ¹ŞÀº Á¤¼öÀÇ À¯È¿¹üÀ§ Ã¼Å©
+	// ë©”ì†Œë“œ: ì…ë ¥ ë°›ì€ ì •ìˆ˜ì˜ ìœ íš¨ë²”ìœ„ ì²´í¬
 	public boolean checkValidInt(int inputNum) {
 		if (inputNum < -100 || inputNum >= 100) {
-			System.out.println("  ÀÔ·Â ¹ŞÀº Á¤¼ö " + inputNum + "Àº(´Â) À¯È¿ÇÏÁö ¾Ê½À´Ï´Ù.");
+			System.out.println("  ì…ë ¥ ë°›ì€ ì •ìˆ˜ " + inputNum + "ì€(ëŠ”) ìœ íš¨í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 			return false;
 		}
 		return true;
 	}
 
-	// ¸Ş¼Òµå: ÀüÃ¼·ÎÁ÷(»ç¿ëÀÚ ÀÔ·ÂºÎÅÍ °á°ú¹° Ãâ·Â±îÁö)¿¡ ´ëÇØ ½ÇÇà
+	// ë©”ì†Œë“œ: ì „ì²´ë¡œì§(ì‚¬ìš©ì ì…ë ¥ë¶€í„° ê²°ê³¼ë¬¼ ì¶œë ¥ê¹Œì§€)ì— ëŒ€í•´ ì‹¤í–‰
 	public void executePrompt() {
 		int inputCount = 0;
 		String inputDir = "";
 
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("  ´Ü¾î, È¸Àü½ÃÅ³ ¹®ÀÚÀÇ ¼ö, È¸Àü ¹æÇâ ¼øÀ¸·Î ÀÔ·ÂÇÏ½Ê½Ã¿À. (exit: -1) ");
+		System.out.println("  ë‹¨ì–´, íšŒì „ì‹œí‚¬ ë¬¸ìì˜ ìˆ˜, íšŒì „ ë°©í–¥ ìˆœìœ¼ë¡œ ì…ë ¥í•˜ì‹­ì‹œì˜¤. (exit: -1) ");
 
 		while (true) {
 			System.out.print("  > ");
@@ -27,22 +27,22 @@ public class Prompt {
 			if (input.equals("-1"))
 				break;
 
-			// ÀÔ·Â°ª¿¡ ´ëÇØ °ø¹é¹®ÀÚ¸¦ ±âÁØÀ¸·Î ºĞÇÒ
+			// ì…ë ¥ê°’ì— ëŒ€í•´ ê³µë°±ë¬¸ìë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë¶„í• 
 			String[] inputSplit = input.split(" ");
 
-			// µÎ¹øÂ° ÀÔ·Â°ª(Á¤¼ö)ÀÌ À¯È¿ÇÏÁö ¾Ê´Ù¸é °ü·Ã ¸Ş¼¼Áö Ãâ·Â ÈÄ ¹İº¹¹® Å»Ãâ
+			// ë‘ë²ˆì§¸ ì…ë ¥ê°’(ì •ìˆ˜)ì´ ìœ íš¨í•˜ì§€ ì•Šë‹¤ë©´ ê´€ë ¨ ë©”ì„¸ì§€ ì¶œë ¥ í›„ ë°˜ë³µë¬¸ íƒˆì¶œ
 			if (!checkValidInt(inputCount))
 				break;
 
-			// Ã¹¹øÂ° ÀÔ·Â°ª(´Ü¾î)¿¡ ´ëÇØ char Array ÇüÅÂ·Î º¯È¯
+			// ì²«ë²ˆì§¸ ì…ë ¥ê°’(ë‹¨ì–´)ì— ëŒ€í•´ char Array í˜•íƒœë¡œ ë³€í™˜
 			char[] inputCharArray = inputSplit[0].toCharArray();
-			// µÎ¹øÂ° ÀÔ·Â°ª(Á¤¼ö)¿¡ ´ëÇØ Á¤¼ö ÇüÅÂ·Î º¯È¯
+			// ë‘ë²ˆì§¸ ì…ë ¥ê°’(ì •ìˆ˜)ì— ëŒ€í•´ ì •ìˆ˜ í˜•íƒœë¡œ ë³€í™˜
 			inputCount = Integer.parseInt(inputSplit[1]);
-			// ¼¼¹øÂ° ÀÔ·Â°ª(ÀÌµ¿¹æÇâ)¿¡ ´ëÇØ ´ë¹®ÀÚ·Î º¯È¯
+			// ì„¸ë²ˆì§¸ ì…ë ¥ê°’(ì´ë™ë°©í–¥)ì— ëŒ€í•´ ëŒ€ë¬¸ìë¡œ ë³€í™˜
 			inputDir = inputSplit[2].toUpperCase();
 
 			PushOutWords pushWords = new PushOutWords();
-			// »ç¿ëÀÚ ÀÔ·Â°ªÀ» Åä´ë·Î ¹®ÀÚ¸¦ ¹Ğ¾î³½ °á°ú¸¦ ¹İÈ¯
+			// ì‚¬ìš©ì ì…ë ¥ê°’ì„ í† ëŒ€ë¡œ ë¬¸ìë¥¼ ë°€ì–´ë‚¸ ê²°ê³¼ ë°˜í™˜
 			char[] resultOfPushed = pushWords.getPushed(inputCharArray, inputCount, inputDir);
 
 			System.out.println("  " + String.valueOf(resultOfPushed));

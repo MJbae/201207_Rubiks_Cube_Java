@@ -1,14 +1,14 @@
 package step1;
 
 public class PushOutWords {
-	// ¸Ş¼Òµå: »ç¿ëÀÚ ÀÔ·Â°ª¿¡ µû¶ó °á°úÀûÀ¸·Î ÀÌµ¿ÇÏ´Â ¹æÇâÀÌ °°Àº °æ¿ì¿¡ ´ëÇØ ÀûÀıÇÑ ¸Ş¼Òµå ±¸ºĞ
+	// ë©”ì†Œë“œ: ì‚¬ìš©ì ì…ë ¥ê°’ì— ë”°ë¼ ê²°ê³¼ì ìœ¼ë¡œ ì´ë™í•˜ëŠ” ë°©í–¥ì´ ê°™ì€ ê²½ìš°ì— ëŒ€í•´ ì ì ˆí•œ ë©”ì†Œë“œ êµ¬ë¶„
 	public char[] getPushed(char[] inputCharArray, int inputCount, String inputDir) {
-		// ¿À¸¥ÂÊÀ¸·Î ÀÔ·Â´Ü¾î°¡ ÀÌµ¿ÇÏ´Â °æ¿ì(ÀÔ·ÂÁ¤¼ö À½¼ö, ÀÌµ¿¹æÇâ ¿ŞÂÊ + Á¤¼ö ¾ç¼ö, ÀÌµ¿¹æÇâ ¿À¸¥ÂÊ) 
+		// ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì…ë ¥ë‹¨ì–´ê°€ ì´ë™í•˜ëŠ” ê²½ìš°(ì…ë ¥ì •ìˆ˜ ìŒìˆ˜, ì´ë™ë°©í–¥ ì™¼ìª½ + ì •ìˆ˜ ì–‘ìˆ˜, ì´ë™ë°©í–¥ ì˜¤ë¥¸ìª½) 
 		if ((inputCount >= 0 && inputDir.equals("R")) || (inputCount < 0 && inputDir.equals("L"))) {
 			inputCount = inputCount < 0 ? inputCount * (-1) : inputCount;
 			return getRightPushedString(inputCharArray, inputCount, inputCharArray.length);
 			
-		// ¿ŞÂÊÀ¸·Î ÀÔ·Â´Ü¾î°¡ ÀÌµ¿ÇÏ´Â °æ¿ì(ÀÔ·ÂÁ¤¼ö°¡ ¾ç¼ö, ÀÌµ¿¹æÇâ ¿À¸¥ÂÊ + Á¤¼ö À½¼ö, ÀÌµ¿¹æÇâ ¿ŞÂÊ) 
+		// ì™¼ìª½ìœ¼ë¡œ ì…ë ¥ë‹¨ì–´ê°€ ì´ë™í•˜ëŠ” ê²½ìš°(ì…ë ¥ì •ìˆ˜ê°€ ì–‘ìˆ˜, ì´ë™ë°©í–¥ ì˜¤ë¥¸ìª½ + ì •ìˆ˜ ìŒìˆ˜, ì´ë™ë°©í–¥ ì™¼ìª½) 
 		} else if ((inputCount >= 0 && inputDir.equals("L")) || (inputCount < 0 && inputDir.equals("R"))) {
 			inputCount = inputCount < 0 ? inputCount * (-1) : inputCount;
 			return getLeftPushedString(inputCharArray, inputCount, inputCharArray.length);
@@ -17,9 +17,9 @@ public class PushOutWords {
 		}
 	}
 
-	// ¸Ş¼Òµå: ¿À¸¥ÂÊ ¹æÇâÀ¸·Î ÀÔ·Â´Ü¾î ÀÌµ¿
+	// ë©”ì†Œë“œ: ì˜¤ë¥¸ìª½ ë°©í–¥ìœ¼ë¡œ ì…ë ¥ë‹¨ì–´ ì´ë™
 	public char[] getRightPushedString(char[] inputCharArray, int inputCount, int lengthOfinputString) {
-		// inputCharArray¿¡ ´ëÇØ ¸¶Áö¸· ¿ä¼Ò¸¦ ¸Ç ¾ÕÀ¸·Î ¿Å±â´Â ·ÎÁ÷
+		// inputCharArrayì— ëŒ€í•´ ë§ˆì§€ë§‰ ìš”ì†Œë¥¼ ë§¨ ì•ìœ¼ë¡œ ì˜®ê¸°ëŠ” ë¡œì§
 		for (int i = lengthOfinputString; i > lengthOfinputString - inputCount; i--) {
 			char tempChar = inputCharArray[lengthOfinputString - 1];
 
@@ -32,9 +32,10 @@ public class PushOutWords {
 		return inputCharArray;
 	}
 
-	// ¸Ş¼Òµå: ¿ŞÂÊ ¹æÇâÀ¸·Î ÀÔ·Â´Ü¾î ÀÌµ¿
+	// ë©”ì†Œë“œ: ì™¼ìª½ ë°©í–¥ìœ¼ë¡œ ì…ë ¥ë‹¨ì–´ ì´ë™
 	public char[] getLeftPushedString(char[] inputCharArray, int inputCount, int lengthOfinputString) {
-		// inputCharArray¿¡ ´ëÇØ Ã¹¹øÂ° ¿ä¼Ò¸¦ ¸¶Áö¸·À¸·Î ¿Å±â´Â ·ÎÁ÷
+
+		// inputCharArrayì— ëŒ€í•´ ì²«ë²ˆì§¸ ìš”ì†Œë¥¼ ë§ˆì§€ë§‰ìœ¼ë¡œ ì˜®ê¸°ëŠ” ë¡œì§
 		for (int index = 0; index < inputCount; index++) {
 			char tempChar = inputCharArray[0];
 
