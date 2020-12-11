@@ -74,7 +74,7 @@ public class PushRubiksCube {
 			for (int i = 0; i < UpsideOfRotation.length; i++)
 				rubiksCube[UpsideOfRotation[i]][indexOfColumn] = tempCube[i];
 
-			// Upside 반시계방향으로 회전
+		// Upside 반시계방향으로 회전
 		} else if (inputDir.equals("U'") || inputDir.equals("D")) {
 			int[] UpsideOfCounterRotation = { FRONT_SIDE, BACK_SIDE, LEFT_SIDE, RIGHT_SIDE };
 
