@@ -62,7 +62,7 @@ public class PromptCube {
 			// 각각의 명령 수행
 			for (String inputDir : splitStringArray) {
 				// 각각의 명령따라 큐브 이동
-				pushCube.getPushedCube(twoDimensionalCube, inputDir, SIZE_OF_CUBE);
+				twoDimensionalCube = pushCube.getPushedCube(twoDimensionalCube, inputDir, SIZE_OF_CUBE);
 
 				// 큐브의 이동 결과 출력
 				System.out.println("  " + inputDir);

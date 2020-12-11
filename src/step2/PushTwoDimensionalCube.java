@@ -3,31 +3,33 @@ package step2;
 import step1.*;
 
 public class PushTwoDimensionalCube {
-	// TODO: 자바에서 메소드를 매개변수로 전달하는 방법 학습 후 R,R',L,L' 중복코드 제거하기
-	public char[][] getPushedCube(char[][] twoDimensionalCube, String inputDir, int SIZE_OF_CUBE) {
+	// 메소드: 문자 이동방향에 따라 하위 메소드 호출
+	public char[][] getPushedCube(char[][] flatCube, String inputDir, int SIZE_OF_CUBE) {
 
 		char[] tempCube = new char[SIZE_OF_CUBE];
 
-		// else if로 중간 구분하고 switch 사용 X
+		// contains 메소드 활용하여 이동방향의 부분값으로 하위 메소드 구분 호출
 		 if(inputDir.contains("U")){
-			 twoDimensionalCube[0] = getUpBottomPushed(twoDimensionalCube[0], SIZE_OF_CUBE, inputDir);
+			 flatCube[0] = getUpBottomPushed(flatCube[0], SIZE_OF_CUBE, inputDir);
 		 } else if(inputDir.contains("B")) {
-			 twoDimensionalCube[SIZE_OF_CUBE - 1] = getUpBottomPushed(twoDimensionalCube[SIZE_OF_CUBE - 1], SIZE_OF_CUBE, inputDir);
+			 flatCube[SIZE_OF_CUBE - 1] = getUpBottomPushed(flatCube[SIZE_OF_CUBE - 1], SIZE_OF_CUBE, inputDir);
 		 } else if(inputDir.contains("L")) {
-			 twoDimensionalCube = getLeftPushed(twoDimensionalCube, SIZE_OF_CUBE, inputDir, tempCube);
+			 flatCube = getLeftPushed(flatCube, SIZE_OF_CUBE, inputDir, tempCube);
 		 } else if(inputDir.contains("R")) {
-			 twoDimensionalCube = getRightPushed(twoDimensionalCube, SIZE_OF_CUBE, inputDir, tempCube);
+			 flatCube = getRightPushed(flatCube, SIZE_OF_CUBE, inputDir, tempCube);
 		 }
 		 
-		return twoDimensionalCube;
+		return flatCube;
 	}
 	
+	// 메소드: Right side로 문자 이동
 	public char[][] getRightPushed(char[][] inputArray, int SIZE_OF_CUBE, String inputDir, char[] tempCube) {
 		PushOutWords pushWords = new PushOutWords();
 
 		for (int i = 0; i < SIZE_OF_CUBE; i++)
 			tempCube[i] = inputArray[i][SIZE_OF_CUBE - 1];
 		
+		// 시계방향, 반시계방향 구분하여 임시 변수에 이동할 문자 할당
 		tempCube = (inputDir.equals("R"))
 				? pushWords.getLeftpushedString(tempCube, 1, SIZE_OF_CUBE)
 				: pushWords.getRightpushedString(tempCube, 1, SIZE_OF_CUBE);
@@ -38,12 +40,14 @@ public class PushTwoDimensionalCube {
 		return inputArray;
 	}
 	
+	// 메소드: Left side로 문자 이동
 	public char[][] getLeftPushed(char[][] inputArray, int SIZE_OF_CUBE, String inputDir, char[] tempCube) {
 		PushOutWords pushWords = new PushOutWords();
 
 		for (int i = 0; i < SIZE_OF_CUBE; i++)
 			tempCube[i] = inputArray[i][0];
 		
+		// 시계방향, 반시계방향 구분하여 임시 변수에 이동할 문자 할당
 		tempCube = (inputDir.equals("L"))
 				? pushWords.getRightpushedString(tempCube, 1, SIZE_OF_CUBE)
 				: pushWords.getLeftpushedString(tempCube, 1, SIZE_OF_CUBE);
@@ -54,6 +58,7 @@ public class PushTwoDimensionalCube {
 		return inputArray;
 	}
 
+	// 메소드: Up or Bottom side로 문자 이동
 	public char[] getUpBottomPushed(char[] inputArray, int SIZE_OF_CUBE, String inputDir) {
 		PushOutWords pushWords = new PushOutWords();
 
