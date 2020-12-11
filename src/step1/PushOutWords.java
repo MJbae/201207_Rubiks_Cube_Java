@@ -36,7 +36,7 @@ public class PushOutWords {
 	public char[] getLeftPushedString(char[] inputCharArray, int inputCount, int lengthOfinputString) {
 
 		// inputCharArray에 대해 첫번째 요소를 마지막으로 옮기는 로직
-		for (int index = 0; index < inputCount; index++) {
+		for (int i = 0; i < inputCount; i++) {
 			char tempChar = inputCharArray[0];
 
 			for (int j = 0; j < lengthOfinputString - 1; j++) {
