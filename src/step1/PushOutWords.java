@@ -1,6 +1,7 @@
 package step1;
 
 public class PushOutWords {
+
 	// 메소드: 사용자 입력값에 따라 결과적으로 이동하는 방향이 같은 경우에 대해 적절한 메소드 구분
 	public char[] getPushed(char[] inputCharArray, int inputCount, String inputDir) {
 		// 오른쪽으로 입력단어가 이동하는 경우(입력정수 음수, 이동방향 왼쪽 + 정수 양수, 이동방향 오른쪽) 
