@@ -62,9 +62,9 @@ public class PushTwoDimensionalCube {
 	public char[] getUpBottomPushed(char[] inputArray, int SIZE_OF_CUBE, String inputDir) {
 		PushOutWords pushWords = new PushOutWords();
 
-		if (inputDir.equals("U") || inputDir.equals("B")) {
+		if (inputDir.equals("U") || inputDir.equals("B'")) {
 			return pushWords.getLeftPushedString(inputArray, 1, SIZE_OF_CUBE);
-		} else if (inputDir.equals("U'") || inputDir.equals("B'")) {
+		} else if (inputDir.equals("U'") || inputDir.equals("B")) {
 			return pushWords.getRightPushedString(inputArray, 1, SIZE_OF_CUBE);
 		} else {
 			return null;
