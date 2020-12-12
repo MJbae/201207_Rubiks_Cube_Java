@@ -114,17 +114,17 @@ public class PromptRubiks {
 	}
 
 	public static void main(String[] args) {
+		// 초기값 정의
 		char[][] frontCube = { { 'G', 'G', 'G' }, { 'G', 'G', 'G' }, { 'G', 'G', 'G' } };
 		char[][] upCube = { { 'W', 'W', 'W' }, { 'W', 'W', 'W' }, { 'W', 'W', 'W' } };
 		char[][] leftCube = { { 'O', 'O', 'O' }, { 'O', 'O', 'O' }, { 'O', 'O', 'O' } };
 		char[][] downCube = { { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' } };
 		char[][] rightCube = { { 'R', 'R', 'R' }, { 'R', 'R', 'R' }, { 'R', 'R', 'R' } };
 		char[][] backCube = { { 'B', 'B', 'B' }, { 'B', 'B', 'B' }, { 'B', 'B', 'B' } };
-
 		char[][][] rubiksCube = { backCube, upCube, leftCube, downCube, rightCube, frontCube };
 
+		//prompt 실행
 		PromptRubiks prompt = new PromptRubiks();
-
 		prompt.executePrompt(rubiksCube);
 	}
 

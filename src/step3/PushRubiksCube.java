@@ -2,6 +2,7 @@ package step3;
 
 public class PushRubiksCube {
 
+	// 주요 상수 정의
 	public static final int BACK_SIDE = 0;
 	public static final int UP_SIDE = 1;
 	public static final int LEFT_SIDE = 2;
@@ -57,6 +58,7 @@ public class PushRubiksCube {
 		}
 	}
 
+	// 메소드: Up or Down side 회전
 	public char[][][] getUpDownRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
 
 		int[] sidesOfRotation = { LEFT_SIDE, RIGHT_SIDE, BACK_SIDE, FRONT_SIDE };
@@ -66,14 +68,14 @@ public class PushRubiksCube {
 		for (int i = 0; i < sidesOfRotation.length; i++)
 			tempCube[i] = rubiksCube[sidesOfRotation[i]][indexOfColumn];
 
-		// Upside 시계방향으로 회전
+		// Up side 시계방향으로 회전 or Down side 반시계방향 회전
 		if (inputDir.equals("U") || inputDir.equals("D'")) {
 			int[] UpsideOfRotation = { BACK_SIDE, FRONT_SIDE, RIGHT_SIDE, LEFT_SIDE };
 
 			for (int i = 0; i < UpsideOfRotation.length; i++)
 				rubiksCube[UpsideOfRotation[i]][indexOfColumn] = tempCube[i];
 
-		// Upside 반시계방향으로 회전
+		// Up side 반시계방향으로 회전 or Down side 시계방향 회전
 		} else if (inputDir.equals("U'") || inputDir.equals("D")) {
 			int[] UpsideOfCounterRotation = { FRONT_SIDE, BACK_SIDE, LEFT_SIDE, RIGHT_SIDE };
 
@@ -83,25 +85,26 @@ public class PushRubiksCube {
 
 		return rubiksCube;
 	}
-
+	
+	// 메소드: Front or Back side 회전
 	public char[][][] getFrontBackRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
 
 		int[] sidesOfRotation = { LEFT_SIDE, UP_SIDE, RIGHT_SIDE, DOWN_SIDE };
 
 		int indexOfColumn = (inputDir.equals("F") || inputDir.equals("F'")) ? INDEX_OF_LAST : INDEX_OF_FIRST;
 
-		// tempCube에 각 side Cube의 마지막행을 할당함
+		// tempCube에 각 side Cube의 마지막행 또는 첫번째행을 할당함
 		for (int i = 0; i < sidesOfRotation.length; i++)
 			tempCube[i] = rubiksCube[sidesOfRotation[i]][indexOfColumn];
 
-		// Upside 시계방향으로 회전
+		// Front side 시계방향으로 회전 or Back side 반시계방향으로 회전
 		if (inputDir.equals("F") || inputDir.equals("B'")) {
 			int[] UpsideOfRotation = { UP_SIDE, RIGHT_SIDE, DOWN_SIDE, LEFT_SIDE };
 
 			for (int i = 0; i < UpsideOfRotation.length; i++)
 				rubiksCube[UpsideOfRotation[i]][indexOfColumn] = tempCube[i];
 
-			// Upside 반시계방향으로 회전
+		// Front side 반시계방향으로 회전 or Back side 시계방향으로 회전
 		} else if (inputDir.equals("F'") || inputDir.equals("B")) {
 			int[] UpsideOfCounterRotation = { DOWN_SIDE, LEFT_SIDE, UP_SIDE, RIGHT_SIDE };
 
@@ -111,24 +114,27 @@ public class PushRubiksCube {
 
 		return rubiksCube;
 	}
-
+	
+	// 메소드: Right or Left side 회전
 	public char[][][] getRightLeftRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
 		int[] sidesOfRotation = { FRONT_SIDE, UP_SIDE, BACK_SIDE, DOWN_SIDE };
 
 		int indexOfColumn = (inputDir.equals("R") || inputDir.equals("R'")) ? INDEX_OF_LAST : INDEX_OF_FIRST;
 
-		// tempCube에 각 side Cube의 마지막 열을 할당함
+		// tempCube에 각 side Cube의 마지막열 또는 첫번째열을 할당함
 		for (int j = 0; j < 4; j++) {
 			for (int i = 0; i < 3; i++)
 				tempCube[j][i] = rubiksCube[sidesOfRotation[j]][i][indexOfColumn];
 		}
-
+		
+		// Right side 시계방향으로 회전 or Left side 반시계방향으로 회전
 		if (inputDir.equals("R") || inputDir.equals("L'")) {
 			int[] UpsideOfRotation = { UP_SIDE, BACK_SIDE, DOWN_SIDE, FRONT_SIDE };
 			for (int j = 0; j < 4; j++) {
 				for (int i = 0; i < 3; i++)
 					rubiksCube[UpsideOfRotation[j]][i][indexOfColumn] = tempCube[j][i];
 			}
+		// Right side 반시계방향으로 회전 or Left side 시계방향으로 회전
 		} else if (inputDir.equals("R'") || inputDir.equals("L")) {
 			int[] UpsideOfCounterRotation = { DOWN_SIDE, FRONT_SIDE, UP_SIDE, BACK_SIDE };
 			for (int j = 0; j < 4; j++) {
