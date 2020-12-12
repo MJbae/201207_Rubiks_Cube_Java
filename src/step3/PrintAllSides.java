@@ -8,7 +8,7 @@ public class PrintAllSides {
 	private static final int RIGHT_SIDE = PushRubiksCube.RIGHT_SIDE;
 	private static final int FRONT_SIDE = PushRubiksCube.FRONT_SIDE;
 
-	// 메소드: Rubiks Cube 전체 출력
+	// 메소드: Rubiks Cube 모든 Sides 전체 출력
 	public void printResult(char[][][] threeDimensionalCube) {
 
 		// back side 출력
@@ -39,14 +39,14 @@ public class PrintAllSides {
 		printFrontBack(threeDimensionalCube, FRONT_SIDE);
 	}
 
-	// 메소드: Rubiks Front/Back Side 출력
+	// 메소드: Left/Right/Up/Down Side 출력
 	public void printLeftRightUpDown(char[][][] threeDimensionalCube, int side, int index) {
 		for (char elementOfCube : threeDimensionalCube[side][index]) {
 			System.out.print(elementOfCube + " ");
 		}
 	}
 
-	// 메소드: Rubiks Front/Back Side 출력
+	// 메소드: Front/Back Side 출력
 	public void printFrontBack(char[][][] threeDimensionalCube, int side) {
 		// back side cube 출력
 		for (char[] oneDimensionalCube : threeDimensionalCube[side]) {

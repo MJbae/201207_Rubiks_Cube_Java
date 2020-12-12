@@ -39,6 +39,7 @@ public class PromptRubiks {
 		}
 	}
 
+	// 메소드: 유효한 입력값인지 확인
 	public boolean isValidInput(String input) {
 		boolean isValid = false;
 
@@ -55,10 +56,10 @@ public class PromptRubiks {
 		return isValid;
 	}
 
+	// 메소드: 명령에 따라 큐브 회전
 	public char[][][] runRotation(char[][][] rubiksCube, String[] splitStringArray, int numOfRotation) {
 
 		PushRubiksCube pushRubiks = new PushRubiksCube();
-		PrintAllSides printAll = new PrintAllSides();
 
 		for (String inputDir : splitStringArray) {
 			// 각 입력값의 유효성 체크
@@ -74,11 +75,9 @@ public class PromptRubiks {
 			System.out.println("  " + inputDir);
 
 			// 유효 입력에 따라 Rubiks Cube 회전
-			rubiksCube = pushRubiks.getPushedRubiks(rubiksCube, inputDir);
-
-			printAll.printResult(rubiksCube);
+			pushRubiks.getPushedRubiks(rubiksCube, inputDir);
 		}
-
+		
 		return rubiksCube;
 	}
 
@@ -102,8 +101,11 @@ public class PromptRubiks {
 			// 입력값을 구분하여 String array에 할당
 			String[] splitStringArray = splitInputString(input);
 
-			// 각각의 입력에 대한 반복실행
+			// 각각의 명령에 따라 큐브 회전
 			rubiksCube = runRotation(rubiksCube, splitStringArray, numOfRotation);
+
+			// 회전 결과 출력
+			printAll.printResult(rubiksCube);
 		}
 		// 조작개수 출력
 		System.out.println("  조작개수: " + numOfRotation);
@@ -124,7 +126,6 @@ public class PromptRubiks {
 		PromptRubiks prompt = new PromptRubiks();
 
 		prompt.executePrompt(rubiksCube);
-
 	}
 
 }

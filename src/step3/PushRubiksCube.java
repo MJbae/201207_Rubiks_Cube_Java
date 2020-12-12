@@ -16,7 +16,7 @@ public class PushRubiksCube {
 
 	private static final int NUM_OF_ROTATION = 4;
 
-	// 메소드: 사용자 입력값 중 주요 키워드의 포함여부를 기준으로 세부 호출메소드 호출
+	// 메소드: 사용자 입력값 중 주요 키워드의 포함여부를 기준으로 세부 메소드 호출
 	public char[][][] getPushedRubiks(char[][][] rubiksCube, String inputDir) {
 		char[][] tempCube = new char[NUM_OF_ROTATION][LENGTH_OF_ROW_COLUMN];
 
@@ -37,7 +37,7 @@ public class PushRubiksCube {
 		}
 	}
 
-	// 메소드: Up/Down Side의 Cube의 구체적인 회전동작을 기준으로 특정 메소드 호출
+	// 메소드: 두번 회전하는 경우, 특정 메소드를 두 번 실행
 	public char[][][] getDoubleRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
 
 		if (inputDir.equals("R2") || inputDir.equals("L2")) {
@@ -73,7 +73,7 @@ public class PushRubiksCube {
 			for (int i = 0; i < UpsideOfRotation.length; i++)
 				rubiksCube[UpsideOfRotation[i]][indexOfColumn] = tempCube[i];
 
-			// Upside 반시계방향으로 회전
+		// Upside 반시계방향으로 회전
 		} else if (inputDir.equals("U'") || inputDir.equals("D")) {
 			int[] UpsideOfCounterRotation = { FRONT_SIDE, BACK_SIDE, LEFT_SIDE, RIGHT_SIDE };
 
