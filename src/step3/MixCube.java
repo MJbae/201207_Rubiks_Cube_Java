@@ -10,7 +10,7 @@ public class MixCube {
 		return (int)(randomNum * 10);
 	}
 	
-	// 메소드: 유효명령어 배열의 요소를 무작위로 선택하여 해당 명령어로 큐브를 회전 
+	// 메소드: 유효명령어 배열의 요소를 무작위로 선택하여 각각의 명령어로 큐브를 회전 
 	public char[][][] getMixedCube(char[][][] rubiksCube) {
 		PushRubiksCube pushRubiks = new PushRubiksCube();
 		int randomInt = getRandomInt();
