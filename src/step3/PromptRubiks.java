@@ -96,25 +96,11 @@ public class PromptRubiks {
 		System.out.println("  경과시간: " + showTime);
 	}
 
-	public char[][][] getMixedCube(char[][][] rubiksCube) {
-		PushRubiksCube pushRubiks = new PushRubiksCube();
-		String[] mixedInputs = { "L", "R" };
-
-		for (String inputDir : mixedInputs) {
-			rubiksCube = pushRubiks.getPushedRubiks(rubiksCube, inputDir);
-		}
-
-		System.out.println("");
-		PrintAllSides printAll = new PrintAllSides();
-		printAll.printResult(rubiksCube);
-
-		return rubiksCube;
-	}
-
 	// 메소드: 전체로직(사용자 입력부터 결과물 출력까지)에 대해 실행
 	public void executePrompt(char[][][] rubiksCube) {
 		Scanner scanner = new Scanner(System.in);
 		PrintAllSides printAll = new PrintAllSides();
+		MixCube mix = new MixCube();
 		long startTime = System.currentTimeMillis();
 
 		// 초기값 출력
@@ -133,7 +119,7 @@ public class PromptRubiks {
 
 			// 무작위 섞기 기능 실행
 			if (input.equals("M")) {
-				rubiksCube = getMixedCube(rubiksCube);
+				rubiksCube = mix.getMixedCube(rubiksCube);
 				continue;
 			}
 
