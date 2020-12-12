@@ -60,6 +60,7 @@ public class PromptRubiks {
 	public char[][][] runRotation(char[][][] rubiksCube, String[] splitStringArray, int numOfRotation) {
 
 		PushRubiksCube pushRubiks = new PushRubiksCube();
+		PrintAllSides printAll = new PrintAllSides();
 
 		for (String inputDir : splitStringArray) {
 			// 각 입력값의 유효성 체크
@@ -71,13 +72,15 @@ public class PromptRubiks {
 			// 입력개수 카운팅
 			countRotation(inputDir);
 
+			// 유효 입력에 따라 Rubiks Cube 회전
+			rubiksCube = pushRubiks.getPushedRubiks(rubiksCube, inputDir);
+
+			// 각 명령에 따른 회전 결과 출력
 			System.out.println("");
 			System.out.println("  " + inputDir);
-
-			// 유효 입력에 따라 Rubiks Cube 회전
-			pushRubiks.getPushedRubiks(rubiksCube, inputDir);
+			printAll.printResult(rubiksCube);
 		}
-		
+
 		return rubiksCube;
 	}
 
@@ -103,9 +106,6 @@ public class PromptRubiks {
 
 			// 각각의 명령에 따라 큐브 회전
 			rubiksCube = runRotation(rubiksCube, splitStringArray, numOfRotation);
-
-			// 회전 결과 출력
-			printAll.printResult(rubiksCube);
 		}
 		// 조작개수 출력
 		System.out.println("  조작개수: " + numOfRotation);
@@ -123,7 +123,7 @@ public class PromptRubiks {
 		char[][] backCube = { { 'B', 'B', 'B' }, { 'B', 'B', 'B' }, { 'B', 'B', 'B' } };
 		char[][][] rubiksCube = { backCube, upCube, leftCube, downCube, rightCube, frontCube };
 
-		//prompt 실행
+		// prompt 실행
 		PromptRubiks prompt = new PromptRubiks();
 		prompt.executePrompt(rubiksCube);
 	}
