@@ -38,7 +38,7 @@ public class PushRubiksCube {
 		}
 	}
 
-	// 메소드: 두번 회전하는 경우, 특정 메소드를 두 번 실행
+	// 메소드: 반복적으로 회전하는 경우, 특정 메소드를 반복횟수에 따라 반복 실행
 	public char[][][] getDoubleRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
 
 		if (inputDir.equals("R2") || inputDir.equals("L2")) {
@@ -111,7 +111,6 @@ public class PushRubiksCube {
 			for (int i = 0; i < UpsideOfCounterRotation.length; i++)
 				rubiksCube[UpsideOfCounterRotation[i]][indexOfColumn] = tempCube[i];
 		}
-
 		return rubiksCube;
 	}
 	
@@ -127,14 +126,13 @@ public class PushRubiksCube {
 				tempCube[j][i] = rubiksCube[sidesOfRotation[j]][i][indexOfColumn];
 		}
 		
-		// Right side 시계방향으로 회전 or Left side 반시계방향으로 회전
+		// Right side 시계방향으로 회전 or Back side 반시계방향으로 회전
 		if (inputDir.equals("R") || inputDir.equals("L'")) {
 			int[] UpsideOfRotation = { UP_SIDE, BACK_SIDE, DOWN_SIDE, FRONT_SIDE };
 			for (int j = 0; j < 4; j++) {
 				for (int i = 0; i < 3; i++)
 					rubiksCube[UpsideOfRotation[j]][i][indexOfColumn] = tempCube[j][i];
 			}
-		// Right side 반시계방향으로 회전 or Left side 시계방향으로 회전
 		} else if (inputDir.equals("R'") || inputDir.equals("L")) {
 			int[] UpsideOfCounterRotation = { DOWN_SIDE, FRONT_SIDE, UP_SIDE, BACK_SIDE };
 			for (int j = 0; j < 4; j++) {
