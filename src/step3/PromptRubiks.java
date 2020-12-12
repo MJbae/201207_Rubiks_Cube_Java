@@ -4,16 +4,17 @@ import java.util.Scanner;
 
 public class PromptRubiks {
 	private static int numOfRotation = 0;
+	
+	private static final int BACK_SIDE = PushRubiksCube.BACK_SIDE;
+	private static final int UP_SIDE = PushRubiksCube.UP_SIDE;
+	private static final int LEFT_SIDE = PushRubiksCube.LEFT_SIDE;
+	private static final int DOWN_SIDE = PushRubiksCube.DOWN_SIDE;
+	private static final int RIGHT_SIDE = PushRubiksCube.RIGHT_SIDE;
+	private static final int FRONT_SIDE = PushRubiksCube.FRONT_SIDE;
 
 	// 메소드: Rubiks Cube 전체 출력
 	public void printResult(char[][][] threeDimensionalCube) {
-		int BACK_SIDE = PushRubiksCube.BACK_SIDE;
-		int UP_SIDE = PushRubiksCube.UP_SIDE;
-		int LEFT_SIDE = PushRubiksCube.LEFT_SIDE;
-		int DOWN_SIDE = PushRubiksCube.DOWN_SIDE;
-		int RIGHT_SIDE = PushRubiksCube.RIGHT_SIDE;
-		int FRONT_SIDE = PushRubiksCube.FRONT_SIDE;
-
+		
 		final int LENGTH_OF_CUBE = threeDimensionalCube[BACK_SIDE][0].length;
 
 		// back side cube 출력

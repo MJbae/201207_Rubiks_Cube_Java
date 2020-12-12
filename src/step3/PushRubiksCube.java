@@ -9,17 +9,16 @@ public class PushRubiksCube {
 	public static final int RIGHT_SIDE = 4;
 	public static final int FRONT_SIDE = 5;
 
-	public static final int INDEX_OF_LAST = 2;
-	public static final int INDEX_OF_FIRST = 0;
+	private static final int INDEX_OF_LAST = 2;
+	private static final int INDEX_OF_FIRST = 0;
 
-	public static final int LENGTH_OF_ROW = 3;
-	public static final int LENGTH_OF_COLUMN = 3;
+	private static final int LENGTH_OF_ROW_COLUMN = 3;
 
-	public static final int NUM_OF_ROTATION = 4;
+	private static final int NUM_OF_ROTATION = 4;
 
 	// 메소드: 사용자 입력값 중 주요 키워드의 포함여부를 기준으로 세부 호출메소드 호출
 	public char[][][] getPushedRubiks(char[][][] rubiksCube, String inputDir) {
-		char[][] tempCube = new char[NUM_OF_ROTATION][LENGTH_OF_ROW];
+		char[][] tempCube = new char[NUM_OF_ROTATION][LENGTH_OF_ROW_COLUMN];
 
 		if (inputDir.contains("2")) {
 			return rubiksCube = getDoubleRotated(rubiksCube, tempCube, inputDir);
