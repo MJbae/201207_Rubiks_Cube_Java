@@ -39,7 +39,8 @@ public class PromptCube {
 
 		return new String(inputSplit).split(" ");
 	}
-
+	
+	// 메소드: 전체로직(사용자 입력부터 결과물 출력까지)에 대해 실행
 	public void executePrompt(char[][] twoDimensionalCube, int SIZE_OF_CUBE) {
 		Scanner scanner = new Scanner(System.in);
 		PromptCube prompt = new PromptCube();

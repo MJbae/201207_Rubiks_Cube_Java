@@ -26,6 +26,7 @@ public class PushTwoDimensionalCube {
 	public char[][] getRightPushed(char[][] inputArray, int SIZE_OF_CUBE, String inputDir, char[] tempCube) {
 		PushOutWords pushWords = new PushOutWords();
 
+		// 평면 큐브의 맨 오른쪽 열의 모든 원소를 임시 배열에 저장
 		for (int i = 0; i < SIZE_OF_CUBE; i++)
 			tempCube[i] = inputArray[i][SIZE_OF_CUBE - 1];
 		
@@ -44,6 +45,7 @@ public class PushTwoDimensionalCube {
 	public char[][] getLeftPushed(char[][] inputArray, int SIZE_OF_CUBE, String inputDir, char[] tempCube) {
 		PushOutWords pushWords = new PushOutWords();
 
+		// 평면 큐브의 맨 왼쪽 열의 모든 원소를 임시 배열에 저장
 		for (int i = 0; i < SIZE_OF_CUBE; i++)
 			tempCube[i] = inputArray[i][0];
 		
@@ -62,9 +64,9 @@ public class PushTwoDimensionalCube {
 	public char[] getUpBottomPushed(char[] inputArray, int SIZE_OF_CUBE, String inputDir) {
 		PushOutWords pushWords = new PushOutWords();
 
-		if (inputDir.equals("U") || inputDir.equals("B")) {
+		if (inputDir.equals("U") || inputDir.equals("B'")) {
 			return pushWords.getLeftPushedString(inputArray, 1, SIZE_OF_CUBE);
-		} else if (inputDir.equals("U'") || inputDir.equals("B'")) {
+		} else if (inputDir.equals("U'") || inputDir.equals("B")) {
 			return pushWords.getRightPushedString(inputArray, 1, SIZE_OF_CUBE);
 		} else {
 			return null;
