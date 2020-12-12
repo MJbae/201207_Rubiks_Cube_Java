@@ -14,43 +14,40 @@ public class PromptRubiks {
 
 	// 메소드: Rubiks Cube 전체 출력
 	public void printResult(char[][][] threeDimensionalCube) {
-		
+
 		// back side 출력
 		printFrontBack(threeDimensionalCube, BACK_SIDE);
 
-		final int LENGTH_OF_CUBE = threeDimensionalCube[0][0].length;
-
-		for (int i = 0; i < LENGTH_OF_CUBE; i++) {
+		for (int i = 0; i < threeDimensionalCube[0][0].length; i++) {
 			System.out.print("  ");
 
 			// up side cube 출력
-			for (char elementOfCube : threeDimensionalCube[UP_SIDE][i]) {
-				System.out.print(elementOfCube + " ");
-			}
+			printLeftRightUpDown(threeDimensionalCube, UP_SIDE, i);
 			System.out.print("  ");
-
+			
 			// left side cube 출력
-			for (char elementOfCube : threeDimensionalCube[LEFT_SIDE][i]) {
-				System.out.print(elementOfCube + " ");
-			}
+			printLeftRightUpDown(threeDimensionalCube, LEFT_SIDE, i);
 			System.out.print("  ");
 
 			// down side cube 출력
-			for (char elementOfCube : threeDimensionalCube[DOWN_SIDE][i]) {
-				System.out.print(elementOfCube + " ");
-			}
+			printLeftRightUpDown(threeDimensionalCube, DOWN_SIDE, i);
 			System.out.print("  ");
-
+			
 			// right side cube 출력
-			for (char elementOfCube : threeDimensionalCube[RIGHT_SIDE][i]) {
-				System.out.print(elementOfCube + " ");
-			}
+			printLeftRightUpDown(threeDimensionalCube, RIGHT_SIDE, i);
 			System.out.println("");
 		}
 		System.out.println("");
-		
+
 		// front side 출력
 		printFrontBack(threeDimensionalCube, FRONT_SIDE);
+	}
+
+	// 메소드: Rubiks Front/Back Side 출력
+	public void printLeftRightUpDown(char[][][] threeDimensionalCube, int side, int index) {
+		for (char elementOfCube : threeDimensionalCube[side][index]) {
+			System.out.print(elementOfCube + " ");
+		}
 	}
 
 	// 메소드: Rubiks Front/Back Side 출력
