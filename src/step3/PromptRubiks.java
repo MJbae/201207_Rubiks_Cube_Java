@@ -1,5 +1,7 @@
 package step3;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class PromptRubiks {
@@ -83,11 +85,22 @@ public class PromptRubiks {
 
 		return rubiksCube;
 	}
+	
+	// 메소드: 매개변수로 전달받은 시간과 본 메소드가 호출된 시간 간 차이에 대해 출력
+	public void getElapsedTime(long startTime) {
+		long endTime = System.currentTimeMillis();
+		long elapsedSec = endTime - startTime;
+		
+		SimpleDateFormat time = new SimpleDateFormat("mm:ss");
+		String showTime = time.format(new Date(elapsedSec));
+		System.out.println("  경과시간: " + showTime);
+	}
 
 	// 메소드: 전체로직(사용자 입력부터 결과물 출력까지)에 대해 실행
 	public void executePrompt(char[][][] rubiksCube) {
 		Scanner scanner = new Scanner(System.in);
 		PrintAllSides printAll = new PrintAllSides();
+		long startTime = System.currentTimeMillis();
 
 		// 초기값 출력
 		printAll.printResult(rubiksCube);
@@ -109,6 +122,8 @@ public class PromptRubiks {
 		}
 		// 조작개수 출력
 		System.out.println("  조작개수: " + numOfRotation);
+		// 경과시간 출력
+		getElapsedTime(startTime);
 		System.out.println("  끝~ ");
 		scanner.close();
 	}
