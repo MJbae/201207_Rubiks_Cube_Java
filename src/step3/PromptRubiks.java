@@ -5,64 +5,6 @@ import java.util.Scanner;
 public class PromptRubiks {
 	private static int numOfRotation = 0;
 
-	private static final int BACK_SIDE = PushRubiksCube.BACK_SIDE;
-	private static final int UP_SIDE = PushRubiksCube.UP_SIDE;
-	private static final int LEFT_SIDE = PushRubiksCube.LEFT_SIDE;
-	private static final int DOWN_SIDE = PushRubiksCube.DOWN_SIDE;
-	private static final int RIGHT_SIDE = PushRubiksCube.RIGHT_SIDE;
-	private static final int FRONT_SIDE = PushRubiksCube.FRONT_SIDE;
-
-	// 메소드: Rubiks Cube 전체 출력
-	public void printResult(char[][][] threeDimensionalCube) {
-
-		// back side 출력
-		printFrontBack(threeDimensionalCube, BACK_SIDE);
-
-		for (int i = 0; i < threeDimensionalCube[0][0].length; i++) {
-			System.out.print("  ");
-
-			// up side cube 출력
-			printLeftRightUpDown(threeDimensionalCube, UP_SIDE, i);
-			System.out.print("  ");
-			
-			// left side cube 출력
-			printLeftRightUpDown(threeDimensionalCube, LEFT_SIDE, i);
-			System.out.print("  ");
-
-			// down side cube 출력
-			printLeftRightUpDown(threeDimensionalCube, DOWN_SIDE, i);
-			System.out.print("  ");
-			
-			// right side cube 출력
-			printLeftRightUpDown(threeDimensionalCube, RIGHT_SIDE, i);
-			System.out.println("");
-		}
-		System.out.println("");
-
-		// front side 출력
-		printFrontBack(threeDimensionalCube, FRONT_SIDE);
-	}
-
-	// 메소드: Rubiks Front/Back Side 출력
-	public void printLeftRightUpDown(char[][][] threeDimensionalCube, int side, int index) {
-		for (char elementOfCube : threeDimensionalCube[side][index]) {
-			System.out.print(elementOfCube + " ");
-		}
-	}
-
-	// 메소드: Rubiks Front/Back Side 출력
-	public void printFrontBack(char[][][] threeDimensionalCube, int side) {
-		// back side cube 출력
-		for (char[] oneDimensionalCube : threeDimensionalCube[side]) {
-			System.out.print("                  ");
-			for (char elementOfCube : oneDimensionalCube) {
-				System.out.print(elementOfCube + " ");
-			}
-			System.out.println("");
-		}
-		System.out.println("");
-	}
-
 	// 메소드: 사용자 입력값을 유효한 명령으로 나누어 반환
 	public String[] splitInputString(String input) {
 
@@ -116,6 +58,7 @@ public class PromptRubiks {
 	public char[][][] runRotation(char[][][] rubiksCube, String[] splitStringArray, int numOfRotation) {
 
 		PushRubiksCube pushRubiks = new PushRubiksCube();
+		PrintAllSides printAll = new PrintAllSides();
 
 		for (String inputDir : splitStringArray) {
 			// 각 입력값의 유효성 체크
@@ -133,7 +76,7 @@ public class PromptRubiks {
 			// 유효 입력에 따라 Rubiks Cube 회전
 			rubiksCube = pushRubiks.getPushedRubiks(rubiksCube, inputDir);
 
-			printResult(rubiksCube);
+			printAll.printResult(rubiksCube);
 		}
 
 		return rubiksCube;
@@ -142,9 +85,10 @@ public class PromptRubiks {
 	// 메소드: 전체로직(사용자 입력부터 결과물 출력까지)에 대해 실행
 	public void executePrompt(char[][][] rubiksCube) {
 		Scanner scanner = new Scanner(System.in);
+		PrintAllSides printAll = new PrintAllSides();
 
 		// 초기값 출력
-		printResult(rubiksCube);
+		printAll.printResult(rubiksCube);
 
 		while (true) {
 			// 사용자 입력
@@ -160,7 +104,6 @@ public class PromptRubiks {
 
 			// 각각의 입력에 대한 반복실행
 			rubiksCube = runRotation(rubiksCube, splitStringArray, numOfRotation);
-
 		}
 		// 조작개수 출력
 		System.out.println("  조작개수: " + numOfRotation);
