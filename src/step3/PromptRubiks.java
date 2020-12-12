@@ -85,15 +85,30 @@ public class PromptRubiks {
 
 		return rubiksCube;
 	}
-	
+
 	// 메소드: 매개변수로 전달받은 시간과 본 메소드가 호출된 시간 간 차이에 대해 출력
 	public void getElapsedTime(long startTime) {
 		long endTime = System.currentTimeMillis();
 		long elapsedSec = endTime - startTime;
-		
+
 		SimpleDateFormat time = new SimpleDateFormat("mm:ss");
 		String showTime = time.format(new Date(elapsedSec));
 		System.out.println("  경과시간: " + showTime);
+	}
+
+	public char[][][] getMixedCube(char[][][] rubiksCube) {
+		PushRubiksCube pushRubiks = new PushRubiksCube();
+		String[] mixedInputs = { "L", "R" };
+
+		for (String inputDir : mixedInputs) {
+			rubiksCube = pushRubiks.getPushedRubiks(rubiksCube, inputDir);
+		}
+
+		System.out.println("");
+		PrintAllSides printAll = new PrintAllSides();
+		printAll.printResult(rubiksCube);
+
+		return rubiksCube;
 	}
 
 	// 메소드: 전체로직(사용자 입력부터 결과물 출력까지)에 대해 실행
@@ -107,7 +122,7 @@ public class PromptRubiks {
 		// 무작위 섞기 및 프로그램 종료 안내 출력
 		System.out.println("  조작 명령어(M: 무작위 섞기 Q: 프로그램 종료)");
 		while (true) {
-			
+
 			// 사용자 입력 prompt
 			System.out.print("  CUBE> ");
 			String input = scanner.nextLine();
@@ -115,11 +130,13 @@ public class PromptRubiks {
 			// 프로그램 종료
 			if (input.equals("Q"))
 				break;
-			
+
 			// 무작위 섞기 기능 실행
-			if (input.equals("M"))
-				break;
-			
+			if (input.equals("M")) {
+				rubiksCube = getMixedCube(rubiksCube);
+				continue;
+			}
+
 			// 입력값을 구분하여 String array에 할당
 			String[] splitStringArray = splitInputString(input);
 
