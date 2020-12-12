@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class PromptRubiks {
 	private static int numOfRotation = 0;
-	public static final String[] validInputs = { "R", "R'", "L", "L'", "U", "U'", "D", "D'", "F", "F'", "B", "B'", "R2", "L2",
+	public static final String[] VALID_INPUTS = { "R", "R'", "L", "L'", "U", "U'", "D", "D'", "F", "F'", "B", "B'", "R2", "L2",
 			"U2", "D2", "F2", "B2" };
 
 	// 메소드: 사용자 입력값을 유효한 명령으로 나누어 반환
@@ -47,7 +47,7 @@ public class PromptRubiks {
 	public boolean isValidInput(String input) {
 		boolean isValid = false;
 
-		for (String eachInput : validInputs) {
+		for (String eachInput : VALID_INPUTS) {
 			if (input.equals(eachInput)) {
 				isValid = true;
 				break;
