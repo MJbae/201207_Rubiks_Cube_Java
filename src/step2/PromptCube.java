@@ -59,9 +59,8 @@ public class PromptCube {
 			String[] splitStringArray = splitInputString(input);
 			System.out.println("");
 			
-			// 각각의 명령 수행
 			for (String inputDir : splitStringArray) {
-				// 각각의 명령따라 큐브 이동
+				// 각각의 명령 따라 큐브 이동
 				twoDimensionalCube = pushCube.getPushedCube(twoDimensionalCube, inputDir, SIZE_OF_CUBE);
 
 				// 큐브의 이동 결과 출력
@@ -74,7 +73,7 @@ public class PromptCube {
 	}
 
 	public static void main(String[] args) {
-		// 초기값 선언
+		// 초기값 정의
 		char[][] twoDimensionalCube = { { 'R', 'R', 'W' }, { 'G', 'C', 'W' }, { 'G', 'B', 'B' } };
 		final int SIZE_OF_CUBE = twoDimensionalCube[0].length;
 
