@@ -104,16 +104,22 @@ public class PromptRubiks {
 
 		// 초기값 출력
 		printAll.printResult(rubiksCube);
-
+		// 무작위 섞기 및 프로그램 종료 안내 출력
+		System.out.println("  조작 명령어(M: 무작위 섞기 Q: 프로그램 종료)");
 		while (true) {
-			// 사용자 입력
+			
+			// 사용자 입력 prompt
 			System.out.print("  CUBE> ");
 			String input = scanner.nextLine();
 
-			// 실행 중단
+			// 프로그램 종료
 			if (input.equals("Q"))
 				break;
-
+			
+			// 무작위 섞기 기능 실행
+			if (input.equals("M"))
+				break;
+			
 			// 입력값을 구분하여 String array에 할당
 			String[] splitStringArray = splitInputString(input);
 
