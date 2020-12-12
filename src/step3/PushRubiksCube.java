@@ -2,6 +2,7 @@ package step3;
 
 public class PushRubiksCube {
 
+	// ì£¼ìš” ìƒìˆ˜ ì •ì˜
 	public static final int BACK_SIDE = 0;
 	public static final int UP_SIDE = 1;
 	public static final int LEFT_SIDE = 2;
@@ -9,17 +10,16 @@ public class PushRubiksCube {
 	public static final int RIGHT_SIDE = 4;
 	public static final int FRONT_SIDE = 5;
 
-	public static final int INDEX_OF_LAST = 2;
-	public static final int INDEX_OF_FIRST = 0;
+	private static final int INDEX_OF_LAST = 2;
+	private static final int INDEX_OF_FIRST = 0;
 
-	public static final int LENGTH_OF_ROW = 3;
-	public static final int LENGTH_OF_COLUMN = 3;
+	private static final int LENGTH_OF_ROW_COLUMN = 3;
 
-	public static final int NUM_OF_ROTATION = 4;
+	private static final int NUM_OF_ROTATION = 4;
 
-	// ¸Ş¼Òµå: »ç¿ëÀÚ ÀÔ·Â°ª Áß ÁÖ¿ä Å°¿öµåÀÇ Æ÷ÇÔ¿©ºÎ¸¦ ±âÁØÀ¸·Î ¼¼ºÎ È£Ãâ¸Ş¼Òµå È£Ãâ
+	// ë©”ì†Œë“œ: ì‚¬ìš©ì ì…ë ¥ê°’ ì¤‘ ì£¼ìš” í‚¤ì›Œë“œì˜ í¬í•¨ì—¬ë¶€ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ì„¸ë¶€ ë©”ì†Œë“œ í˜¸ì¶œ
 	public char[][][] getPushedRubiks(char[][][] rubiksCube, String inputDir) {
-		char[][] tempCube = new char[NUM_OF_ROTATION][LENGTH_OF_ROW];
+		char[][] tempCube = new char[NUM_OF_ROTATION][LENGTH_OF_ROW_COLUMN];
 
 		if (inputDir.contains("2")) {
 			return rubiksCube = getDoubleRotated(rubiksCube, tempCube, inputDir);
@@ -38,7 +38,7 @@ public class PushRubiksCube {
 		}
 	}
 
-	// ¸Ş¼Òµå: Up/Down SideÀÇ CubeÀÇ ±¸Ã¼ÀûÀÎ È¸Àüµ¿ÀÛÀ» ±âÁØÀ¸·Î Æ¯Á¤ ¸Ş¼Òµå È£Ãâ
+	// ë©”ì†Œë“œ: ë°˜ë³µì ìœ¼ë¡œ íšŒì „í•˜ëŠ” ê²½ìš°, íŠ¹ì • ë©”ì†Œë“œë¥¼ ë°˜ë³µíšŸìˆ˜ì— ë”°ë¼ ë°˜ë³µ ì‹¤í–‰
 	public char[][][] getDoubleRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
 
 		if (inputDir.equals("R2") || inputDir.equals("L2")) {
@@ -58,23 +58,24 @@ public class PushRubiksCube {
 		}
 	}
 
+	// ë©”ì†Œë“œ: Up or Down side íšŒì „
 	public char[][][] getUpDownRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
 
 		int[] sidesOfRotation = { LEFT_SIDE, RIGHT_SIDE, BACK_SIDE, FRONT_SIDE };
 
 		int indexOfColumn = (inputDir.equals("U") || inputDir.equals("U'")) ? INDEX_OF_FIRST : INDEX_OF_LAST;
-		// tempCube¿¡ °¢ side CubeÀÇ Ã¹¹øÂ°ÇàÀ» ÇÒ´çÇÔ
+		// tempCubeì— ê° side Cubeì˜ ì²«ë²ˆì§¸í–‰ì„ í• ë‹¹í•¨
 		for (int i = 0; i < sidesOfRotation.length; i++)
 			tempCube[i] = rubiksCube[sidesOfRotation[i]][indexOfColumn];
 
-		// Upside ½Ã°è¹æÇâÀ¸·Î È¸Àü
+		// Up side ì‹œê³„ë°©í–¥ìœ¼ë¡œ íšŒì „ or Down side ë°˜ì‹œê³„ë°©í–¥ íšŒì „
 		if (inputDir.equals("U") || inputDir.equals("D'")) {
 			int[] UpsideOfRotation = { BACK_SIDE, FRONT_SIDE, RIGHT_SIDE, LEFT_SIDE };
 
 			for (int i = 0; i < UpsideOfRotation.length; i++)
 				rubiksCube[UpsideOfRotation[i]][indexOfColumn] = tempCube[i];
 
-		// Upside ¹İ½Ã°è¹æÇâÀ¸·Î È¸Àü
+		// Up side ë°˜ì‹œê³„ë°©í–¥ìœ¼ë¡œ íšŒì „ or Down side ì‹œê³„ë°©í–¥ íšŒì „
 		} else if (inputDir.equals("U'") || inputDir.equals("D")) {
 			int[] UpsideOfCounterRotation = { FRONT_SIDE, BACK_SIDE, LEFT_SIDE, RIGHT_SIDE };
 
@@ -84,57 +85,59 @@ public class PushRubiksCube {
 
 		return rubiksCube;
 	}
-
+	
+	// ë©”ì†Œë“œ: Front or Back side íšŒì „
 	public char[][][] getFrontBackRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
 
 		int[] sidesOfRotation = { LEFT_SIDE, UP_SIDE, RIGHT_SIDE, DOWN_SIDE };
 
 		int indexOfColumn = (inputDir.equals("F") || inputDir.equals("F'")) ? INDEX_OF_LAST : INDEX_OF_FIRST;
 
-		// tempCube¿¡ °¢ side CubeÀÇ ¸¶Áö¸·ÇàÀ» ÇÒ´çÇÔ
+		// tempCubeì— ê° side Cubeì˜ ë§ˆì§€ë§‰í–‰ ë˜ëŠ” ì²«ë²ˆì§¸í–‰ì„ í• ë‹¹í•¨
 		for (int i = 0; i < sidesOfRotation.length; i++)
 			tempCube[i] = rubiksCube[sidesOfRotation[i]][indexOfColumn];
 
-		// Upside ½Ã°è¹æÇâÀ¸·Î È¸Àü
+		// Front side ì‹œê³„ë°©í–¥ìœ¼ë¡œ íšŒì „ or Back side ë°˜ì‹œê³„ë°©í–¥ìœ¼ë¡œ íšŒì „
 		if (inputDir.equals("F") || inputDir.equals("B'")) {
 			int[] UpsideOfRotation = { UP_SIDE, RIGHT_SIDE, DOWN_SIDE, LEFT_SIDE };
 
 			for (int i = 0; i < UpsideOfRotation.length; i++)
 				rubiksCube[UpsideOfRotation[i]][indexOfColumn] = tempCube[i];
 
-			// Upside ¹İ½Ã°è¹æÇâÀ¸·Î È¸Àü
+		// Front side ë°˜ì‹œê³„ë°©í–¥ìœ¼ë¡œ íšŒì „ or Back side ì‹œê³„ë°©í–¥ìœ¼ë¡œ íšŒì „
 		} else if (inputDir.equals("F'") || inputDir.equals("B")) {
 			int[] UpsideOfCounterRotation = { DOWN_SIDE, LEFT_SIDE, UP_SIDE, RIGHT_SIDE };
 
 			for (int i = 0; i < UpsideOfCounterRotation.length; i++)
 				rubiksCube[UpsideOfCounterRotation[i]][indexOfColumn] = tempCube[i];
 		}
-
 		return rubiksCube;
 	}
-
+	
+	// ë©”ì†Œë“œ: Right or Left side íšŒì „
 	public char[][][] getRightLeftRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
 		int[] sidesOfRotation = { FRONT_SIDE, UP_SIDE, BACK_SIDE, DOWN_SIDE };
 
-		int indexOfColumn = (inputDir.equals("R") || inputDir.equals("R'")) ? INDEX_OF_LAST : INDEX_OF_FIRST;
+		int indexOfRow = (inputDir.equals("R") || inputDir.equals("R'")) ? INDEX_OF_LAST : INDEX_OF_FIRST;
 
-		// tempCube¿¡ °¢ side CubeÀÇ ¸¶Áö¸· ¿­À» ÇÒ´çÇÔ
+		// tempCubeì— ê° side Cubeì˜ ë§ˆì§€ë§‰ì—´ ë˜ëŠ” ì²«ë²ˆì§¸ì—´ì„ í• ë‹¹í•¨
 		for (int j = 0; j < 4; j++) {
 			for (int i = 0; i < 3; i++)
-				tempCube[j][i] = rubiksCube[sidesOfRotation[j]][i][indexOfColumn];
+				tempCube[j][i] = rubiksCube[sidesOfRotation[j]][i][indexOfRow];
 		}
-
+		
+		// Right side ì‹œê³„ë°©í–¥ìœ¼ë¡œ íšŒì „ or Back side ë°˜ì‹œê³„ë°©í–¥ìœ¼ë¡œ íšŒì „
 		if (inputDir.equals("R") || inputDir.equals("L'")) {
 			int[] UpsideOfRotation = { UP_SIDE, BACK_SIDE, DOWN_SIDE, FRONT_SIDE };
 			for (int j = 0; j < 4; j++) {
 				for (int i = 0; i < 3; i++)
-					rubiksCube[UpsideOfRotation[j]][i][indexOfColumn] = tempCube[j][i];
+					rubiksCube[UpsideOfRotation[j]][i][indexOfRow] = tempCube[j][i];
 			}
 		} else if (inputDir.equals("R'") || inputDir.equals("L")) {
 			int[] UpsideOfCounterRotation = { DOWN_SIDE, FRONT_SIDE, UP_SIDE, BACK_SIDE };
 			for (int j = 0; j < 4; j++) {
 				for (int i = 0; i < 3; i++)
-					rubiksCube[UpsideOfCounterRotation[j]][i][indexOfColumn] = tempCube[j][i];
+					rubiksCube[UpsideOfCounterRotation[j]][i][indexOfRow] = tempCube[j][i];
 			}
 		}
 

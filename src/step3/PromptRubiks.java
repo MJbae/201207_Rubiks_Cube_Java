@@ -5,82 +5,21 @@ import java.util.Scanner;
 public class PromptRubiks {
 	private static int numOfRotation = 0;
 
-	// ¸Ş¼Òµå: Rubiks Cube ÀüÃ¼ Ãâ·Â
-	public void printResult(char[][][] threeDimensionalCube) {
-		int BACK_SIDE = PushRubiksCube.BACK_SIDE;
-		int UP_SIDE = PushRubiksCube.UP_SIDE;
-		int LEFT_SIDE = PushRubiksCube.LEFT_SIDE;
-		int DOWN_SIDE = PushRubiksCube.DOWN_SIDE;
-		int RIGHT_SIDE = PushRubiksCube.RIGHT_SIDE;
-		int FRONT_SIDE = PushRubiksCube.FRONT_SIDE;
-
-		final int LENGTH_OF_CUBE = threeDimensionalCube[BACK_SIDE][0].length;
-
-		// back side cube Ãâ·Â
-		for (char[] oneDimensionalCube : threeDimensionalCube[BACK_SIDE]) {
-			System.out.print("                  ");
-			for (char elementOfCube : oneDimensionalCube) {
-				System.out.print(elementOfCube + " ");
-			}
-			System.out.println("");
-		}
-		System.out.println("");
-
-		for (int i = 0; i < LENGTH_OF_CUBE; i++) {
-			System.out.print("  ");
-
-			// up side cube Ãâ·Â
-			for (char elementOfCube : threeDimensionalCube[UP_SIDE][i]) {
-				System.out.print(elementOfCube + " ");
-			}
-			System.out.print("  ");
-
-			// left side cube Ãâ·Â
-			for (char elementOfCube : threeDimensionalCube[LEFT_SIDE][i]) {
-				System.out.print(elementOfCube + " ");
-			}
-			System.out.print("  ");
-
-			// down side cube Ãâ·Â
-			for (char elementOfCube : threeDimensionalCube[DOWN_SIDE][i]) {
-				System.out.print(elementOfCube + " ");
-			}
-			System.out.print("  ");
-
-			// right side cube Ãâ·Â
-			for (char elementOfCube : threeDimensionalCube[RIGHT_SIDE][i]) {
-				System.out.print(elementOfCube + " ");
-			}
-			System.out.println("");
-		}
-		System.out.println("");
-
-		// front side cube Ãâ·Â
-		for (char[] oneDimensionalCube : threeDimensionalCube[FRONT_SIDE]) {
-			System.out.print("                  ");
-			for (char elementOfCube : oneDimensionalCube) {
-				System.out.print(elementOfCube + " ");
-			}
-			System.out.println("");
-		}
-		System.out.println("");
-	}
-
-	// ¸Ş¼Òµå: »ç¿ëÀÚ ÀÔ·Â°ªÀ» À¯È¿ÇÑ ¸í·ÉÀ¸·Î ³ª´©¾î ¹İÈ¯
+	// ë©”ì†Œë“œ: ì‚¬ìš©ì ì…ë ¥ê°’ì„ ìœ íš¨í•œ ëª…ë ¹ìœ¼ë¡œ ë‚˜ëˆ„ì–´ ë°˜í™˜
 	public String[] splitInputString(String input) {
 
 		StringBuffer inputSplit = new StringBuffer(input);
 		int indexOfSplit = 1;
 
-		// String inputÀÇ °¢ ¹®ÀÚ¿¡ ´ëÇØ ¼øÈ¸
+		// String inputì˜ ê° ë¬¸ìì— ëŒ€í•´ ìˆœíšŒ
 		for (int i = 0; i < input.length() - 1; i++) {
-			// ÀÛÀºµû¿ÈÇ¥ or '2' or '3'ÀÌ ÀÖ´Â °æ¿ì, ÇØ´ç ¹®ÀÚ ±âÁØ ¿ìÃø¿¡ °ø¹é ¹®ÀÚ »ğÀÔ
+			// ì‘ì€ë”°ì˜´í‘œ or '2' or '3'ì´ ìˆëŠ” ê²½ìš°, í•´ë‹¹ ë¬¸ì ê¸°ì¤€ ìš°ì¸¡ì— ê³µë°± ë¬¸ì ì‚½ì…
 			if (input.charAt(i + 1) == 39 || input.charAt(i + 1) == 50 || input.charAt(i + 1) == 51) {
 				indexOfSplit += 1;
 				inputSplit.insert(indexOfSplit, " ");
 				i++;
 				indexOfSplit += 2;
-				// ÀÏ¹İ ¹®ÀÚÀÏ °æ¿ì, ´ÙÀ½ ¹®ÀÚ¿¡ ÀÛÀº µû¿ÈÇ¥°¡ ¾ø´Ù¸é ¹®ÀÚ ±âÁØ ¿ìÃø¿¡ °ø¹é ¹®ÀÚ »ğÀÔ
+				// ì¼ë°˜ ë¬¸ìì¼ ê²½ìš°, ë‹¤ìŒ ë¬¸ìì— ì‘ì€ ë”°ì˜´í‘œê°€ ì—†ë‹¤ë©´ ë¬¸ì ê¸°ì¤€ ìš°ì¸¡ì— ê³µë°± ë¬¸ì ì‚½ì…
 			} else {
 				inputSplit.insert(indexOfSplit, " ");
 				indexOfSplit += 2;
@@ -89,7 +28,7 @@ public class PromptRubiks {
 		return new String(inputSplit).split(" ");
 	}
 
-	// ¸Ş¼Òµå: Á¶ÀÛ °³¼ö Ä«¿îÆ®
+	// ë©”ì†Œë“œ: ì¡°ì‘ ê°œìˆ˜ ì¹´ìš´íŠ¸
 	public void countRotation(String input) {
 		if (input.contains("2")) {
 			numOfRotation += 2;
@@ -100,6 +39,7 @@ public class PromptRubiks {
 		}
 	}
 
+	// ë©”ì†Œë“œ: ìœ íš¨í•œ ì…ë ¥ê°’ì¸ì§€ í™•ì¸
 	public boolean isValidInput(String input) {
 		boolean isValid = false;
 
@@ -116,75 +56,76 @@ public class PromptRubiks {
 		return isValid;
 	}
 
+	// ë©”ì†Œë“œ: ëª…ë ¹ì— ë”°ë¼ íë¸Œ íšŒì „
 	public char[][][] runRotation(char[][][] rubiksCube, String[] splitStringArray, int numOfRotation) {
 
 		PushRubiksCube pushRubiks = new PushRubiksCube();
+		PrintAllSides printAll = new PrintAllSides();
 
 		for (String inputDir : splitStringArray) {
-			// °¢ ÀÔ·Â°ªÀÇ À¯È¿¼º Ã¼Å©
+			// ê° ì…ë ¥ê°’ì˜ ìœ íš¨ì„± ì²´í¬
 			if (!isValidInput(inputDir)) {
-				System.out.println("  " + inputDir + ": À¯È¿ÇÏÁö ¾ÊÀº ÀÔ·Â°ªÀÔ´Ï´Ù");
+				System.out.println("  " + inputDir + ": ìœ íš¨í•˜ì§€ ì•Šì€ ì…ë ¥ê°’ì…ë‹ˆë‹¤");
 				break;
 			}
 
-			// ÀÔ·Â°³¼ö Ä«¿îÆÃ
+			// ì…ë ¥ê°œìˆ˜ ì¹´ìš´íŒ…
 			countRotation(inputDir);
 
-			System.out.println("");
-			System.out.println("  " + inputDir);
-
-			// À¯È¿ ÀÔ·Â¿¡ µû¶ó Rubiks Cube È¸Àü
+			// ìœ íš¨ ì…ë ¥ì— ë”°ë¼ Rubiks Cube íšŒì „
 			rubiksCube = pushRubiks.getPushedRubiks(rubiksCube, inputDir);
 
-			printResult(rubiksCube);
+			// ê° ëª…ë ¹ì— ë”°ë¥¸ íšŒì „ ê²°ê³¼ ì¶œë ¥
+			System.out.println("");
+			System.out.println("  " + inputDir);
+			printAll.printResult(rubiksCube);
 		}
 
 		return rubiksCube;
 	}
 
-	// ¸Ş¼Òµå: »ç¿ëÀÚ ÀÔ·Â°ª ¹Ş°í °á°ú¹° Ãâ·Â
+	// ë©”ì†Œë“œ: ì „ì²´ë¡œì§(ì‚¬ìš©ì ì…ë ¥ë¶€í„° ê²°ê³¼ë¬¼ ì¶œë ¥ê¹Œì§€)ì— ëŒ€í•´ ì‹¤í–‰
 	public void executePrompt(char[][][] rubiksCube) {
 		Scanner scanner = new Scanner(System.in);
-		
-		// ÃÊ±â°ª Ãâ·Â
-		printResult(rubiksCube);
+		PrintAllSides printAll = new PrintAllSides();
+
+		// ì´ˆê¸°ê°’ ì¶œë ¥
+		printAll.printResult(rubiksCube);
 
 		while (true) {
-			// »ç¿ëÀÚ ÀÔ·Â
+			// ì‚¬ìš©ì ì…ë ¥
 			System.out.print("  CUBE> ");
 			String input = scanner.nextLine();
 
-			// ½ÇÇà Áß´Ü
+			// ì‹¤í–‰ ì¤‘ë‹¨
 			if (input.equals("Q"))
 				break;
 
-			// ÀÔ·Â°ªÀ» ±¸ºĞÇÏ¿© String array¿¡ ÇÒ´ç
+			// ì…ë ¥ê°’ì„ êµ¬ë¶„í•˜ì—¬ String arrayì— í• ë‹¹
 			String[] splitStringArray = splitInputString(input);
-			
-			// °¢°¢ÀÇ ÀÔ·Â¿¡ ´ëÇÑ ¹İº¹½ÇÇà
-			rubiksCube = runRotation(rubiksCube, splitStringArray, numOfRotation);
 
+			// ê°ê°ì˜ ëª…ë ¹ì— ë”°ë¼ íë¸Œ íšŒì „
+			rubiksCube = runRotation(rubiksCube, splitStringArray, numOfRotation);
 		}
-		// Á¶ÀÛ°³¼ö Ãâ·Â
-		System.out.println("  Á¶ÀÛ°³¼ö: " + numOfRotation);
-		System.out.println("  ³¡~ ");
+		// ì¡°ì‘ê°œìˆ˜ ì¶œë ¥
+		System.out.println("  ì¡°ì‘ê°œìˆ˜: " + numOfRotation);
+		System.out.println("  ë~ ");
 		scanner.close();
 	}
 
 	public static void main(String[] args) {
+		// ì´ˆê¸°ê°’ ì •ì˜
 		char[][] frontCube = { { 'G', 'G', 'G' }, { 'G', 'G', 'G' }, { 'G', 'G', 'G' } };
 		char[][] upCube = { { 'W', 'W', 'W' }, { 'W', 'W', 'W' }, { 'W', 'W', 'W' } };
 		char[][] leftCube = { { 'O', 'O', 'O' }, { 'O', 'O', 'O' }, { 'O', 'O', 'O' } };
 		char[][] downCube = { { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' }, { 'Y', 'Y', 'Y' } };
 		char[][] rightCube = { { 'R', 'R', 'R' }, { 'R', 'R', 'R' }, { 'R', 'R', 'R' } };
 		char[][] backCube = { { 'B', 'B', 'B' }, { 'B', 'B', 'B' }, { 'B', 'B', 'B' } };
-
 		char[][][] rubiksCube = { backCube, upCube, leftCube, downCube, rightCube, frontCube };
 
+		// prompt ì‹¤í–‰
 		PromptRubiks prompt = new PromptRubiks();
-
 		prompt.executePrompt(rubiksCube);
-
 	}
 
 }
