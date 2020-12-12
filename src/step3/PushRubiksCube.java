@@ -118,12 +118,12 @@ public class PushRubiksCube {
 	public char[][][] getRightLeftRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
 		int[] sidesOfRotation = { FRONT_SIDE, UP_SIDE, BACK_SIDE, DOWN_SIDE };
 
-		int indexOfColumn = (inputDir.equals("R") || inputDir.equals("R'")) ? INDEX_OF_LAST : INDEX_OF_FIRST;
+		int indexOfRow = (inputDir.equals("R") || inputDir.equals("R'")) ? INDEX_OF_LAST : INDEX_OF_FIRST;
 
 		// tempCube에 각 side Cube의 마지막열 또는 첫번째열을 할당함
 		for (int j = 0; j < 4; j++) {
 			for (int i = 0; i < 3; i++)
-				tempCube[j][i] = rubiksCube[sidesOfRotation[j]][i][indexOfColumn];
+				tempCube[j][i] = rubiksCube[sidesOfRotation[j]][i][indexOfRow];
 		}
 		
 		// Right side 시계방향으로 회전 or Back side 반시계방향으로 회전
@@ -131,13 +131,13 @@ public class PushRubiksCube {
 			int[] UpsideOfRotation = { UP_SIDE, BACK_SIDE, DOWN_SIDE, FRONT_SIDE };
 			for (int j = 0; j < 4; j++) {
 				for (int i = 0; i < 3; i++)
-					rubiksCube[UpsideOfRotation[j]][i][indexOfColumn] = tempCube[j][i];
+					rubiksCube[UpsideOfRotation[j]][i][indexOfRow] = tempCube[j][i];
 			}
 		} else if (inputDir.equals("R'") || inputDir.equals("L")) {
 			int[] UpsideOfCounterRotation = { DOWN_SIDE, FRONT_SIDE, UP_SIDE, BACK_SIDE };
 			for (int j = 0; j < 4; j++) {
 				for (int i = 0; i < 3; i++)
-					rubiksCube[UpsideOfCounterRotation[j]][i][indexOfColumn] = tempCube[j][i];
+					rubiksCube[UpsideOfCounterRotation[j]][i][indexOfRow] = tempCube[j][i];
 			}
 		}
 
