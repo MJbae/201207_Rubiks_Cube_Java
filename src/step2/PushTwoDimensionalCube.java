@@ -31,8 +31,8 @@ public class PushTwoDimensionalCube {
 		
 		// 시계방향, 반시계방향 구분하여 임시 변수에 이동할 문자 할당
 		tempCube = (inputDir.equals("R"))
-				? pushWords.getLeftpushedString(tempCube, 1, SIZE_OF_CUBE)
-				: pushWords.getRightpushedString(tempCube, 1, SIZE_OF_CUBE);
+				? pushWords.getLeftPushedString(tempCube, 1, SIZE_OF_CUBE)
+				: pushWords.getRightPushedString(tempCube, 1, SIZE_OF_CUBE);
 		
 		for (int j = 0; j < SIZE_OF_CUBE; j++)
 			inputArray[j][SIZE_OF_CUBE - 1] = tempCube[j];
@@ -49,8 +49,8 @@ public class PushTwoDimensionalCube {
 		
 		// 시계방향, 반시계방향 구분하여 임시 변수에 이동할 문자 할당
 		tempCube = (inputDir.equals("L"))
-				? pushWords.getRightpushedString(tempCube, 1, SIZE_OF_CUBE)
-				: pushWords.getLeftpushedString(tempCube, 1, SIZE_OF_CUBE);
+				? pushWords.getRightPushedString(tempCube, 1, SIZE_OF_CUBE)
+				: pushWords.getLeftPushedString(tempCube, 1, SIZE_OF_CUBE);
 		
 		for (int j = 0; j < SIZE_OF_CUBE; j++)
 			inputArray[j][0] = tempCube[j];
@@ -63,9 +63,9 @@ public class PushTwoDimensionalCube {
 		PushOutWords pushWords = new PushOutWords();
 
 		if (inputDir.equals("U") || inputDir.equals("B")) {
-			return pushWords.getLeftpushedString(inputArray, 1, SIZE_OF_CUBE);
+			return pushWords.getLeftPushedString(inputArray, 1, SIZE_OF_CUBE);
 		} else if (inputDir.equals("U'") || inputDir.equals("B'")) {
-			return pushWords.getRightpushedString(inputArray, 1, SIZE_OF_CUBE);
+			return pushWords.getRightPushedString(inputArray, 1, SIZE_OF_CUBE);
 		} else {
 			return null;
 		}
