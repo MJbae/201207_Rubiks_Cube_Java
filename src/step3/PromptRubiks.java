@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class PromptRubiks {
-	private static final int numOfRotation = 0;
+	private static int numOfRotation = 0;
 	public static final String[] validInputs = { "R", "R'", "L", "L'", "U", "U'", "D", "D'", "F", "F'", "B", "B'", "R2", "L2",
 			"U2", "D2", "F2", "B2" };
 
