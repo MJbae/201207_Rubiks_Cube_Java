@@ -101,6 +101,9 @@ public class PromptRubiks {
 		PrintAllSides printAll = new PrintAllSides();
 		MixCube mix = new MixCube();
 		long startTime = System.currentTimeMillis();
+		
+		// 루빅스큐브의 초기상태에 대한 깊은 복사
+		char[][][] initialRubiksCube = rubiksCube;
 
 		// 초기값 출력
 		printAll.printResult(rubiksCube);
@@ -127,12 +130,20 @@ public class PromptRubiks {
 
 			// 각각의 명령에 따라 큐브 회전
 			rubiksCube = runRotation(rubiksCube, splitStringArray, numOfRotation);
+			
+			// 초기상태 큐브와 비교
+			// 같으면 축하메세지 출력 및 종료
+			// 다르면 큐브 회전 로직 반복
+			
 		}
 		// 조작개수 출력
 		System.out.println("  조작개수: " + numOfRotation);
 		// 경과시간 출력
 		getElapsedTime(startTime);
 		System.out.println("  끝~ ");
+
+		printAll.printResult(initialRubiksCube);
+		printAll.printResult(rubiksCube);
 		scanner.close();
 	}
 
