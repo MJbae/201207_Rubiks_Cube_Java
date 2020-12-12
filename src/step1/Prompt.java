@@ -3,53 +3,52 @@ package step1;
 import java.util.Scanner;
 
 public class Prompt {
+	// ë©”ì†Œë“œ: ì…ë ¥ ë°›ì€ ì •ìˆ˜ì˜ ìœ íš¨ë²”ìœ„ ì²´í¬
+	public boolean checkValidInt(int inputNum) {
+		if (inputNum < -100 || inputNum >= 100) {
+			System.out.println("  ì…ë ¥ ë°›ì€ ì •ìˆ˜ " + inputNum + "ì€(ëŠ”) ìœ íš¨í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+			return false;
+		}
+		return true;
+	}
 
+	// ë©”ì†Œë“œ: ì „ì²´ë¡œì§(ì‚¬ìš©ì ì…ë ¥ë¶€í„° ê²°ê³¼ë¬¼ ì¶œë ¥ê¹Œì§€)ì— ëŒ€í•´ ì‹¤í–‰
 	public void executePrompt() {
-		String inputString = "";
 		int inputCount = 0;
 		String inputDir = "";
 
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("  ´Ü¾î, È¸Àü½ÃÅ³ ¹®ÀÚÀÇ ¼ö, È¸Àü ¹æÇâ ¼øÀ¸·Î ÀÔ·ÂÇÏ½Ê½Ã¿À. (exit: -1) ");
-		
+		System.out.println("  ë‹¨ì–´, íšŒì „ì‹œí‚¬ ë¬¸ìì˜ ìˆ˜, íšŒì „ ë°©í–¥ ìˆœìœ¼ë¡œ ì…ë ¥í•˜ì‹­ì‹œì˜¤. (exit: -1) ");
+
 		while (true) {
 			System.out.print("  > ");
-
 			String input = scanner.nextLine();
-			// -1 ÀÔ·Â ½Ã ¼øÈ¸¹® Å»Ãâ
-			if( input.equals("-1")) break;
-			
-			// ÀÔ·Â°ª¿¡ ´ëÇØ °ø¹é¹®ÀÚ¸¦ ±âÁØÀ¸·Î ³ª´®
+
+			if (input.equals("-1"))
+				break;
+
+			// ì…ë ¥ê°’ì— ëŒ€í•´ ê³µë°±ë¬¸ìë¥¼ ê¸°ì¤€ìœ¼ë¡œ ë¶„í• 
 			String[] inputSplit = input.split(" ");
-			inputString = inputSplit[0];
+
+			// ë‘ë²ˆì§¸ ì…ë ¥ê°’(ì •ìˆ˜)ì´ ìœ íš¨í•˜ì§€ ì•Šë‹¤ë©´ ê´€ë ¨ ë©”ì„¸ì§€ ì¶œë ¥ í›„ ë°˜ë³µë¬¸ íƒˆì¶œ
+			if (!checkValidInt(inputCount))
+				break;
+
+			// ì²«ë²ˆì§¸ ì…ë ¥ê°’(ë‹¨ì–´)ì— ëŒ€í•´ char Array í˜•íƒœë¡œ ë³€í™˜
+			char[] inputCharArray = inputSplit[0].toCharArray();
+			// ë‘ë²ˆì§¸ ì…ë ¥ê°’(ì •ìˆ˜)ì— ëŒ€í•´ ì •ìˆ˜ í˜•íƒœë¡œ ë³€í™˜
 			inputCount = Integer.parseInt(inputSplit[1]);
-			inputDir = inputSplit[2];
-			
-			char[] answer = new char[inputString.length()];
+			// ì„¸ë²ˆì§¸ ì…ë ¥ê°’(ì´ë™ë°©í–¥)ì— ëŒ€í•´ ëŒ€ë¬¸ìë¡œ ë³€í™˜
+			inputDir = inputSplit[2].toUpperCase();
 
-			int lengthOfinputString = inputString.length();
 			PushOutWords pushWords = new PushOutWords();
+			// ì‚¬ìš©ì ì…ë ¥ê°’ì„ í† ëŒ€ë¡œ ë¬¸ìë¥¼ ë°€ì–´ë‚¸ ê²°ê³¼ ë°˜í™˜
+			char[] resultOfPushed = pushWords.getPushed(inputCharArray, inputCount, inputDir);
 
-			char[] inputCharArray = inputString.toCharArray();
-			// È¸Àü ¹æÇâ ÀÔ·Â°ªÀ» ´ë¹®ÀÚ·Î º¯È¯
-			inputDir = inputDir.toUpperCase();
-
-			// ¿À¸¥ÂÊÀ¸·Î ¹®ÀÚ¸¦ È¸Àü½ÃÅ°´Â °æ¿ì
-			if ((inputCount >= 0 && inputDir.equals("R")) || (inputCount < 0 && inputDir.equals("L"))) {
-				inputCount = inputCount < 0 ? inputCount * (-1) : inputCount;
-				answer = pushWords.getRightpushedString(inputCharArray, inputCount, lengthOfinputString);
-			// ¿ŞÂÊÀ¸·Î ¹®ÀÚ¸¦ È¸Àü½ÃÅ°´Â °æ¿ì
-			} else if ((inputCount >= 0 && inputDir.equals("L")) || (inputCount < 0 && inputDir.equals("R"))) {
-				inputCount = inputCount < 0 ? inputCount * (-1) : inputCount;
-				answer = pushWords.getLeftpushedString(inputCharArray, inputCount, lengthOfinputString);
-			} else {
-				System.out.println("À¯È¿ÇÑ ¸í·É¾î¸¦ ÀÔ·ÂÇÏ½Ê½Ã¿À");
-			}
-			
-			// È¸Àü °á°ú Ãâ·Â
-			System.out.println("  " + String.valueOf(answer));
+			System.out.println("  " + String.valueOf(resultOfPushed));
 			System.out.println("");
 		}
+		System.out.println("");
 		System.out.println("  Done");
 		scanner.close();
 	}
