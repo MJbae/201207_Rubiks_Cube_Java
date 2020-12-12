@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class PromptRubiks {
 	private static int numOfRotation = 0;
-	
+
 	private static final int BACK_SIDE = PushRubiksCube.BACK_SIDE;
 	private static final int UP_SIDE = PushRubiksCube.UP_SIDE;
 	private static final int LEFT_SIDE = PushRubiksCube.LEFT_SIDE;
@@ -15,17 +15,10 @@ public class PromptRubiks {
 	// 메소드: Rubiks Cube 전체 출력
 	public void printResult(char[][][] threeDimensionalCube) {
 		
-		final int LENGTH_OF_CUBE = threeDimensionalCube[BACK_SIDE][0].length;
+		// back side 출력
+		printFrontBack(threeDimensionalCube, BACK_SIDE);
 
-		// back side cube 출력
-		for (char[] oneDimensionalCube : threeDimensionalCube[BACK_SIDE]) {
-			System.out.print("                  ");
-			for (char elementOfCube : oneDimensionalCube) {
-				System.out.print(elementOfCube + " ");
-			}
-			System.out.println("");
-		}
-		System.out.println("");
+		final int LENGTH_OF_CUBE = threeDimensionalCube[0][0].length;
 
 		for (int i = 0; i < LENGTH_OF_CUBE; i++) {
 			System.out.print("  ");
@@ -55,9 +48,15 @@ public class PromptRubiks {
 			System.out.println("");
 		}
 		System.out.println("");
+		
+		// front side 출력
+		printFrontBack(threeDimensionalCube, FRONT_SIDE);
+	}
 
-		// front side cube 출력
-		for (char[] oneDimensionalCube : threeDimensionalCube[FRONT_SIDE]) {
+	// 메소드: Rubiks Front/Back Side 출력
+	public void printFrontBack(char[][][] threeDimensionalCube, int side) {
+		// back side cube 출력
+		for (char[] oneDimensionalCube : threeDimensionalCube[side]) {
 			System.out.print("                  ");
 			for (char elementOfCube : oneDimensionalCube) {
 				System.out.print(elementOfCube + " ");
@@ -143,7 +142,7 @@ public class PromptRubiks {
 		return rubiksCube;
 	}
 
-	// 메소드: 사용자 입력값 받고 결과물 출력
+	// 메소드: 전체로직(사용자 입력부터 결과물 출력까지)에 대해 실행
 	public void executePrompt(char[][][] rubiksCube) {
 		Scanner scanner = new Scanner(System.in);
 
