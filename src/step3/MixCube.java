@@ -7,12 +7,16 @@ public class MixCube {
 	// 메소드: 유효명령어 배열의 요소를 무작위로 선택하여 각각의 명령어로 큐브를 회전
 	public char[][][] getMixedCube(char[][][] rubiksCube) {
 		PushRubiksCube pushRubiks = new PushRubiksCube();
-		int randomInt = getRandomInt();
+		int tempRandom = getRandomInt();
+		int randomInt = (tempRandom > 2) ? tempRandom : 3;
+		System.out.println("R1 "+randomInt);
 		String[] mixedInputs = new String[randomInt];
 
 		// 유효한 명령어 배열(INPUTS)에서 요소를 무작위로 선택하여 mixedInputs 배열에 할당
 		for (int i = 0; i < randomInt; i++) {
 			int randomInt2 = getRandomInt();
+
+			System.out.println("R2 "+randomInt2);
 			mixedInputs[i] = INPUTS[randomInt2];
 		}
 
