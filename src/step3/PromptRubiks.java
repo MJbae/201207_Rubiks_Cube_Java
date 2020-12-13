@@ -10,6 +10,59 @@ public class PromptRubiks {
 	public static final String[] VALID_INPUTS = { "R", "R'", "L", "L'", "U", "U'", "D", "D'", "F", "F'", "B", "B'",
 			"R2", "L2", "U2", "D2", "F2", "B2" };
 
+	// 메소드: 전체로직(사용자 입력부터 결과물 출력까지)에 대해 실행
+	public void executePrompt(char[][][] rubiksCube) {
+		PrintAllSides printAll = new PrintAllSides();
+		MixCube mix = new MixCube();
+		Utils util = new Utils();
+		Scanner scanner = new Scanner(System.in);
+		long startTime = System.currentTimeMillis();
+
+		// 초기값 깊은 복사
+		char[][][] initialRubiks = util.copyOfRubiks(rubiksCube);
+
+		// 초기값 출력
+		printAll.printResult(initialRubiks);
+		// 무작위 섞기 및 프로그램 종료 안내 출력
+		System.out.println("  조작 명령어(M: 무작위 섞기 Q: 프로그램 종료)");
+		while (true) {
+
+			// 사용자 입력 prompt
+			System.out.print("  CUBE> ");
+			String input = scanner.nextLine();
+
+			// 프로그램 종료
+			if (input.equals("Q"))
+				break;
+
+			// 무작위 섞기 기능 실행
+			if (input.equals("M")) {
+				rubiksCube = mix.getMixedCube(rubiksCube);
+				continue;
+			}
+
+			// 입력값을 구분하여 String array에 할당
+			String[] splitStringArray = splitInputString(input);
+
+			// 각각의 명령에 따라 큐브 회전
+			rubiksCube = runRotation(rubiksCube, splitStringArray, numOfRotation);
+
+			// 초기상태 큐브와 비교
+			// 같으면 축하메세지 출력 및 종료
+			if (Arrays.deepEquals(initialRubiks, rubiksCube)) {
+				System.out.println("  축하합니다. 모든 면을 맞추셨네요~");
+				break;
+			}
+		}
+		// 조작개수 출력
+		System.out.println("  조작개수: " + numOfRotation);
+		// 경과시간 출력
+		util.getElapsedTime(startTime);
+		System.out.println("  끝~ ");
+
+		scanner.close();
+	}
+
 	// 메소드: 사용자 입력값을 유효한 명령으로 나누어 반환
 	public String[] splitInputString(String input) {
 
@@ -31,17 +84,6 @@ public class PromptRubiks {
 			}
 		}
 		return new String(inputSplit).split(" ");
-	}
-
-	// 메소드: 조작 개수 카운트
-	public void countRotation(String input) {
-		if (input.contains("2")) {
-			numOfRotation += 2;
-		} else if (input.contains("3")) {
-			numOfRotation += 3;
-		} else {
-			numOfRotation += 1;
-		}
 	}
 
 	// 메소드: 유효한 입력값인지 확인
@@ -86,65 +128,15 @@ public class PromptRubiks {
 		return rubiksCube;
 	}
 
-	// 메소드: 매개변수로 전달받은 시간과 본 메소드가 호출된 시간 간 차이에 대해 출력
-	public void getElapsedTime(long startTime) {
-		long endTime = System.currentTimeMillis();
-		long elapsedSec = endTime - startTime;
-
-		SimpleDateFormat time = new SimpleDateFormat("mm:ss");
-		String showTime = time.format(new Date(elapsedSec));
-		System.out.println("  경과시간: " + showTime);
-	}
-
-	// 메소드: 전체로직(사용자 입력부터 결과물 출력까지)에 대해 실행
-	public void executePrompt(char[][][] rubiksCube) {
-		Scanner scanner = new Scanner(System.in);
-		PrintAllSides printAll = new PrintAllSides();
-		MixCube mix = new MixCube();
-		long startTime = System.currentTimeMillis();
-
-		char[][][] initialRubiks = mix.copyOfRubiks(rubiksCube);
-
-		// 초기값 출력
-		printAll.printResult(rubiksCube);
-		// 무작위 섞기 및 프로그램 종료 안내 출력
-		System.out.println("  조작 명령어(M: 무작위 섞기 Q: 프로그램 종료)");
-		while (true) {
-
-			// 사용자 입력 prompt
-			System.out.print("  CUBE> ");
-			String input = scanner.nextLine();
-
-			// 프로그램 종료
-			if (input.equals("Q"))
-				break;
-
-			// 무작위 섞기 기능 실행
-			if (input.equals("M")) {
-				rubiksCube = mix.getMixedCube(rubiksCube);
-				continue;
-			}
-
-			// 입력값을 구분하여 String array에 할당
-			String[] splitStringArray = splitInputString(input);
-
-			// 각각의 명령에 따라 큐브 회전
-			rubiksCube = runRotation(rubiksCube, splitStringArray, numOfRotation);
-
-			// 초기상태 큐브와 비교
-			// 같으면 축하메세지 출력 및 종료
-			if (Arrays.deepEquals(initialRubiks, rubiksCube)) {
-				System.out.println("  축하합니다. 모든 면을 맞추셨네요~");
-				break;
-			}
+	// 메소드: 조작 개수 카운트
+	public void countRotation(String input) {
+		if (input.contains("2")) {
+			numOfRotation += 2;
+		} else if (input.contains("3")) {
+			numOfRotation += 3;
+		} else {
+			numOfRotation += 1;
 		}
-		// 조작개수 출력
-		System.out.println("  조작개수: " + numOfRotation);
-		// 경과시간 출력
-		getElapsedTime(startTime);
-		System.out.println("  끝~ ");
-
-		scanner.close();
 	}
 
 	public static void main(String[] args) {

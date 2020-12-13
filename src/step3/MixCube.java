@@ -8,15 +8,14 @@ public class MixCube {
 	public char[][][] getMixedCube(char[][][] rubiksCube) {
 		PushRubiksCube pushRubiks = new PushRubiksCube();
 		int tempRandom = getRandomInt();
+		// 무작위 수가 너무 작을 경우에 대해 default값 적용
 		int randomInt = (tempRandom > 2) ? tempRandom : 3;
-		System.out.println("R1 "+randomInt);
 		String[] mixedInputs = new String[randomInt];
 
 		// 유효한 명령어 배열(INPUTS)에서 요소를 무작위로 선택하여 mixedInputs 배열에 할당
 		for (int i = 0; i < randomInt; i++) {
 			int randomInt2 = getRandomInt();
 
-			System.out.println("R2 "+randomInt2);
 			mixedInputs[i] = INPUTS[randomInt2];
 		}
 
@@ -37,17 +36,5 @@ public class MixCube {
 		return (int) (randomNum * 10);
 	}
 
-	// 메소드: Rubiks Cube에 대한 깊은복사
-	public char[][][] copyOfRubiks(char[][][] rubiks) {
-		// 루빅스큐브의 초기상태에 대한 깊은 복사
-		char[][][] initialRubiksCube = new char[rubiks.length][rubiks[0].length][rubiks[0][0].length];
 
-		for (int i = 0; i < rubiks.length; i++) {
-			for (int j = 0; j < rubiks[i].length; j++) {
-				System.arraycopy(rubiks[i][j], 0, initialRubiksCube[i][j], 0, rubiks[0][0].length);
-			}
-		}
-
-		return initialRubiksCube;
-	}
 }
