@@ -1,13 +1,14 @@
 package step3;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
 public class PromptRubiks {
 	private static int numOfRotation = 0;
-	public static final String[] VALID_INPUTS = { "R", "R'", "L", "L'", "U", "U'", "D", "D'", "F", "F'", "B", "B'", "R2", "L2",
-			"U2", "D2", "F2", "B2" };
+	public static final String[] VALID_INPUTS = { "R", "R'", "L", "L'", "U", "U'", "D", "D'", "F", "F'", "B", "B'",
+			"R2", "L2", "U2", "D2", "F2", "B2" };
 
 	// 메소드: 사용자 입력값을 유효한 명령으로 나누어 반환
 	public String[] splitInputString(String input) {
@@ -101,9 +102,8 @@ public class PromptRubiks {
 		PrintAllSides printAll = new PrintAllSides();
 		MixCube mix = new MixCube();
 		long startTime = System.currentTimeMillis();
-		
-		// 루빅스큐브의 초기상태에 대한 깊은 복사
-		char[][][] initialRubiksCube = rubiksCube;
+
+		char[][][] initialRubiks = mix.copyOfRubiks(rubiksCube);
 
 		// 초기값 출력
 		printAll.printResult(rubiksCube);
@@ -130,11 +130,13 @@ public class PromptRubiks {
 
 			// 각각의 명령에 따라 큐브 회전
 			rubiksCube = runRotation(rubiksCube, splitStringArray, numOfRotation);
-			
+
 			// 초기상태 큐브와 비교
 			// 같으면 축하메세지 출력 및 종료
-			// 다르면 큐브 회전 로직 반복
-			
+			if (Arrays.deepEquals(initialRubiks, rubiksCube)) {
+				System.out.println("  축하합니다. 모든 면을 맞추셨네요~");
+				break;
+			}
 		}
 		// 조작개수 출력
 		System.out.println("  조작개수: " + numOfRotation);
@@ -142,8 +144,6 @@ public class PromptRubiks {
 		getElapsedTime(startTime);
 		System.out.println("  끝~ ");
 
-		printAll.printResult(initialRubiksCube);
-		printAll.printResult(rubiksCube);
 		scanner.close();
 	}
 
