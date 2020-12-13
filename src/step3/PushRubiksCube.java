@@ -60,37 +60,29 @@ public class PushRubiksCube {
 
 	// 메소드: Up or Down side 회전
 	public char[][][] getUpDownRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
-
 		int[] sidesOfRotation = { LEFT_SIDE, RIGHT_SIDE, BACK_SIDE, FRONT_SIDE };
 
 		int indexOfColumn = (inputDir.equals("U") || inputDir.equals("U'")) ? INDEX_OF_FIRST : INDEX_OF_LAST;
 		// tempCube에 각 side Cube의 첫번째행을 할당함
 		for (int i = 0; i < sidesOfRotation.length; i++)
 			tempCube[i] = rubiksCube[sidesOfRotation[i]][indexOfColumn];
-
 		// Up side 시계방향으로 회전 or Down side 반시계방향 회전
 		if (inputDir.equals("U") || inputDir.equals("D'")) {
 			int[] UpsideOfRotation = { BACK_SIDE, FRONT_SIDE, RIGHT_SIDE, LEFT_SIDE };
-
 			for (int i = 0; i < UpsideOfRotation.length; i++)
 				rubiksCube[UpsideOfRotation[i]][indexOfColumn] = tempCube[i];
-
-		// Up side 반시계방향으로 회전 or Down side 시계방향 회전
+			// Up side 반시계방향으로 회전 or Down side 시계방향 회전
 		} else if (inputDir.equals("U'") || inputDir.equals("D")) {
 			int[] UpsideOfCounterRotation = { FRONT_SIDE, BACK_SIDE, LEFT_SIDE, RIGHT_SIDE };
-
 			for (int i = 0; i < UpsideOfCounterRotation.length; i++)
 				rubiksCube[UpsideOfCounterRotation[i]][indexOfColumn] = tempCube[i];
 		}
-
 		return rubiksCube;
 	}
-	
+
 	// 메소드: Front or Back side 회전
 	public char[][][] getFrontBackRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
-
 		int[] sidesOfRotation = { LEFT_SIDE, UP_SIDE, RIGHT_SIDE, DOWN_SIDE };
-
 		int indexOfColumn = (inputDir.equals("F") || inputDir.equals("F'")) ? INDEX_OF_LAST : INDEX_OF_FIRST;
 
 		// tempCube에 각 side Cube의 마지막행 또는 첫번째행을 할당함
@@ -100,24 +92,20 @@ public class PushRubiksCube {
 		// Front side 시계방향으로 회전 or Back side 반시계방향으로 회전
 		if (inputDir.equals("F") || inputDir.equals("B'")) {
 			int[] UpsideOfRotation = { UP_SIDE, RIGHT_SIDE, DOWN_SIDE, LEFT_SIDE };
-
 			for (int i = 0; i < UpsideOfRotation.length; i++)
 				rubiksCube[UpsideOfRotation[i]][indexOfColumn] = tempCube[i];
-
-		// Front side 반시계방향으로 회전 or Back side 시계방향으로 회전
+			// Front side 반시계방향으로 회전 or Back side 시계방향으로 회전
 		} else if (inputDir.equals("F'") || inputDir.equals("B")) {
 			int[] UpsideOfCounterRotation = { DOWN_SIDE, LEFT_SIDE, UP_SIDE, RIGHT_SIDE };
-
 			for (int i = 0; i < UpsideOfCounterRotation.length; i++)
 				rubiksCube[UpsideOfCounterRotation[i]][indexOfColumn] = tempCube[i];
 		}
 		return rubiksCube;
 	}
-	
+
 	// 메소드: Right or Left side 회전
 	public char[][][] getRightLeftRotated(char[][][] rubiksCube, char[][] tempCube, String inputDir) {
 		int[] sidesOfRotation = { FRONT_SIDE, UP_SIDE, BACK_SIDE, DOWN_SIDE };
-
 		int indexOfRow = (inputDir.equals("R") || inputDir.equals("R'")) ? INDEX_OF_LAST : INDEX_OF_FIRST;
 
 		// tempCube에 각 side Cube의 마지막열 또는 첫번째열을 할당함
@@ -125,22 +113,22 @@ public class PushRubiksCube {
 			for (int i = 0; i < 3; i++)
 				tempCube[j][i] = rubiksCube[sidesOfRotation[j]][i][indexOfRow];
 		}
-		
 		// Right side 시계방향으로 회전 or Back side 반시계방향으로 회전
 		if (inputDir.equals("R") || inputDir.equals("L'")) {
-			int[] UpsideOfRotation = { UP_SIDE, BACK_SIDE, DOWN_SIDE, FRONT_SIDE };
-			for (int j = 0; j < 4; j++) {
-				for (int i = 0; i < 3; i++)
-					rubiksCube[UpsideOfRotation[j]][i][indexOfRow] = tempCube[j][i];
-			}
+			int[] RightsideOfRotation = { UP_SIDE, BACK_SIDE, DOWN_SIDE, FRONT_SIDE };
+			rubiksCube = getRowRotated(rubiksCube, indexOfRow, tempCube, RightsideOfRotation);
 		} else if (inputDir.equals("R'") || inputDir.equals("L")) {
-			int[] UpsideOfCounterRotation = { DOWN_SIDE, FRONT_SIDE, UP_SIDE, BACK_SIDE };
-			for (int j = 0; j < 4; j++) {
-				for (int i = 0; i < 3; i++)
-					rubiksCube[UpsideOfCounterRotation[j]][i][indexOfRow] = tempCube[j][i];
-			}
+			int[] RightsideOfCounterRotation = { DOWN_SIDE, FRONT_SIDE, UP_SIDE, BACK_SIDE };
+			rubiksCube = getRowRotated(rubiksCube, indexOfRow, tempCube, RightsideOfCounterRotation);
 		}
+		return rubiksCube;
+	}
 
+	public char[][][] getRowRotated(char[][][] rubiksCube, int row, char[][] tempCube, int[] Rotation) {
+		for (int j = 0; j < 4; j++) {
+			for (int i = 0; i < 3; i++)
+				rubiksCube[Rotation[j]][i][row] = tempCube[j][i];
+		}
 		return rubiksCube;
 	}
 }

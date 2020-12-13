@@ -18,11 +18,11 @@ public class PromptRubiks {
 
 		// 초기값 깊은 복사
 		char[][][] initialRubiks = util.copyOfRubiks(rubiksCube);
-
-		// 초기값 출력
 		printAll.printResult(initialRubiks);
+		
 		// 무작위 섞기 및 프로그램 종료 안내 출력
 		System.out.println("  조작 명령어(M: 무작위 섞기 Q: 프로그램 종료)");
+		
 		while (true) {
 
 			// 사용자 입력 prompt
@@ -52,12 +52,12 @@ public class PromptRubiks {
 				break;
 			}
 		}
+		
 		// 조작개수 출력
 		System.out.println("  조작개수: " + numOfRotation);
 		// 경과시간 출력
 		util.getElapsedTime(startTime);
 		System.out.println("  끝~ ");
-
 		scanner.close();
 	}
 
@@ -100,7 +100,6 @@ public class PromptRubiks {
 
 	// 메소드: 명령에 따라 큐브 회전
 	public char[][][] runRotation(char[][][] rubiksCube, String[] splitStringArray, int numOfRotation) {
-
 		PushRubiksCube pushRubiks = new PushRubiksCube();
 		PrintAllSides printAll = new PrintAllSides();
 
@@ -110,19 +109,15 @@ public class PromptRubiks {
 				System.out.println("  " + inputDir + ": 유효하지 않은 입력값입니다");
 				break;
 			}
-
 			// 입력개수 카운팅
 			countRotation(inputDir);
-
 			// 유효 입력에 따라 Rubiks Cube 회전
 			rubiksCube = pushRubiks.getPushedRubiks(rubiksCube, inputDir);
-
 			// 각 명령에 따른 회전 결과 출력
 			System.out.println("");
 			System.out.println("  " + inputDir);
 			printAll.printResult(rubiksCube);
 		}
-
 		return rubiksCube;
 	}
 
