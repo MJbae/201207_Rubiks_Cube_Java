@@ -17,4 +17,15 @@ class PromptRubiksTest {
         String inputString = argumentsAccessor.getString(1);
         assertEquals(argumentsAccessor.getBoolean(0), prompt.isValidInput(inputString), inputString + " is not Valid");
     }
+
+// TODO: String[]은 어떻게 가져오나?
+//    @ParameterizedTest(name = "[{index}] {argumentsWithNames}")
+//    @CsvSource("L2L, {L2, L}")
+//    void splitInputString(ArgumentsAccessor argumentsAccessor){
+//        PromptRubiks prompt = new PromptRubiks();
+//        String[] resultOfSplitString = prompt.splitInputString(argumentsAccessor.getString(0));
+//        Object[] ExpectedResult = argumentsAccessor.get(1);
+//        assertEquals(ExpectedResult, resultOfSplitString, resultOfSplitString + " is not Valid");
+//    }
+
 }
