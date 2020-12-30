@@ -45,20 +45,27 @@ public class PromptRubiks {
 			// 각각의 명령에 따라 큐브 회전
 			rubiksCube = runRotation(rubiksCube, splitStringArray, numOfRotation);
 
-			// 초기상태 큐브와 비교
+			// 초기상태 큐브와 비교 isCompleted
 			// 같으면 축하메세지 출력 및 종료
 			if (Arrays.deepEquals(initialRubiks, rubiksCube)) {
 				System.out.println("  축하합니다. 모든 면을 맞추셨네요~");
 				break;
 			}
 		}
-		
+		// printResult
+		printResult(startTime);
+
+		scanner.close();
+	}
+
+	// 메소드: 실행 종료에 따른 결과값(조작개수/경과시간) 출력
+	public void printResult(long startTime){
+		Utils util = new Utils();
 		// 조작개수 출력
 		System.out.println("  조작개수: " + numOfRotation);
 		// 경과시간 출력
 		util.getElapsedTime(startTime);
 		System.out.println("  끝~ ");
-		scanner.close();
 	}
 
 	// 메소드: 사용자 입력값을 유효한 명령으로 나누어 반환
