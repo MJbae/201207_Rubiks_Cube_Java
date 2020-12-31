@@ -15,22 +15,18 @@ public class PrintAllSides {
         printBack(threeDimensionalCube);
 
         for (int i = 0; i < threeDimensionalCube[0][0].length; i++) {
-            System.out.print("  ");
-
             // up side cube 출력
-            printLeftRightUpDown(threeDimensionalCube, UP_SIDE, i);
-            System.out.print("  ");
+            printUp(threeDimensionalCube, i);
 
             // left side cube 출력
-            printLeftRightUpDown(threeDimensionalCube, LEFT_SIDE, i);
-            System.out.print("  ");
+            printLeft(threeDimensionalCube, i);
 
             // down side cube 출력
-            printLeftRightUpDown(threeDimensionalCube, DOWN_SIDE, i);
-            System.out.print("  ");
+            printDown(threeDimensionalCube, i);
 
             // right side cube 출력
-            printLeftRightUpDown(threeDimensionalCube, RIGHT_SIDE, i);
+            printRight(threeDimensionalCube, i);
+
             System.out.println("");
         }
         System.out.println("");
@@ -39,11 +35,35 @@ public class PrintAllSides {
         printFront(threeDimensionalCube);
     }
 
-    // 메소드: Left/Right/Up/Down Side 출력
-    public void printLeftRightUpDown(char[][][] threeDimensionalCube, int side, int index) {
+    // 메소드: Left/Right/Up/Down Side 출력의 내부 로직
+    public void printCoreOfLeftRightUpDown(char[][][] threeDimensionalCube, int side, int index) {
         for (char elementOfCube : threeDimensionalCube[side][index]) {
             System.out.print(elementOfCube + " ");
         }
+    }
+
+    // 메소드: Right Side 출력
+    public void printRight(char[][][] threeDimensionalCube, int index) {
+        System.out.print("  ");
+        printCoreOfLeftRightUpDown(threeDimensionalCube, RIGHT_SIDE, index);
+    }
+
+    // 메소드: Up Side 출력
+    public void printUp(char[][][] threeDimensionalCube, int index) {
+        System.out.print("  ");
+        printCoreOfLeftRightUpDown(threeDimensionalCube, UP_SIDE, index);
+    }
+
+    // 메소드: Down Side 출력
+    public void printDown(char[][][] threeDimensionalCube, int index) {
+        System.out.print("  ");
+        printCoreOfLeftRightUpDown(threeDimensionalCube, DOWN_SIDE, index);
+    }
+
+    // 메소드: Left Side 출력
+    public void printLeft(char[][][] threeDimensionalCube, int index) {
+        System.out.print("  ");
+        printCoreOfLeftRightUpDown(threeDimensionalCube, LEFT_SIDE, index);
     }
 
     // 메소드: Front Side 출력
@@ -62,6 +82,7 @@ public class PrintAllSides {
         System.out.println("");
     }
 
+    // 메소드: Back, Front side 출력의 내부로직
     public void printOneDimensionCube(char[] oneDimensionalCube) {
         System.out.print("                  ");
         for (char elementOfCube : oneDimensionalCube) {
