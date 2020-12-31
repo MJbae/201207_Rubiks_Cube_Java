@@ -45,7 +45,7 @@ public class PromptRubiks {
 			// 각각의 명령에 따라 큐브 회전
 			rubiksCube = runRotation(rubiksCube, splitStringArray, numOfRotation);
 
-			// 초기상태 큐브와 비교 isCompleted
+			// 초기상태 큐브와 비교
 			// 같으면 축하메세지 출력 및 종료
 			if (Arrays.deepEquals(initialRubiks, rubiksCube)) {
 				System.out.println("  축하합니다. 모든 면을 맞추셨네요~");
